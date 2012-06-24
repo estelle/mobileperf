@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>localStorage iFrame</title>
+<style>
+
+p {
+font-size: 20px;
+text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+padding: 10px;
+margin: 10px;
+}
+#ls {background-color: #D6D4FD;
+border-radius: 10px;}
+</style>
+</head>
+
+<body>
+<p>You Saved:</p>
+<p id="ls"></p>
+<p>Only works on same domain!</p>
+<script defer>
+ (function(){
+	// if local storage not supported, quit
+	try {
+	  (window.localStorage.getItem) 
+	} catch(e){
+	  return; 
+	}
+
+	var textarea = document.querySelector('#ls');
+	
+	
+	// place content from local storage on load if there is one
+	if (!textarea.value) {
+	  textarea.innerHTML = window.localStorage.getItem('value');
+	}
+ })();
+</script>
+</body>
+</html>

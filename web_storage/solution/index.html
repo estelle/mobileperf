@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The HTML5 Blog</title>
+     <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+  <article>
+    <header>
+      <hgroup>
+        <h1>HTML5 Awesomesauce</h1>
+        <h2>All about localStorage</h2>
+      </hgroup>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="">About</a></li>
+        <li><a href="">Cookies</a>
+        </li>
+        <li><a href="">LocalStorage</a>
+        </li>
+        <li><a href="">SessionStorage</a></li>
+        <li><a href="">Cookies</a>
+      </li></ul>
+    </nav>
+    <section>
+      <div id="input">
+        <h2>Input section</h2>
+        <label for="localKey">Key</label>
+        <input type="text" name="localKey" id="localKey"/>
+        <label for="localValue">Value</label>
+        <input type="text" name="localValue" id="localValue"/>
+        <button id="save-local" onclick="saveLocal()">Save</button>
+      </div>
+      <div id="output">
+        <h2>Output section</h2>
+        <button id="clear-local" onclick="clearAll()">Clear</button>
+        <span id="localCount"></span><br/>
+        <ul id="listLocal">
+        </ul>
+      </div>
+    </section>
+    <aside>
+      <h2>Kittens &amp; Bacon</h2>
+      <p>Short loin tenderloin tri-tip, bacon strip steak pork belly turducken jerky t-bone andouille pig. Speck sirloin spare ribs, ham hock short ribs kielbasa prosciutto tail jerky pork loin ball tip jowl rump. Jerky jowl beef ribs beef short loin, pork chop boudin venison corned beef. Meatloaf sirloin turkey ball tip, ham hock filet mignon speck bacon prosciutto chuck frankfurter. Turducken meatloaf boudin, beef tongue andouille pork loin short ribs swine brisket pork chop sirloin t-bone sausage bacon. Pork belly frankfurter pastrami ball tip spare ribs.</p>
+    </aside>
+    <footer>
+      <h2>HTML5 works on mobile.</h2>
+    </footer>
+    </article>
+    
+    <script src="script.js"></script>
+  </body>
+</html>

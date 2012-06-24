@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The HTML5 Blog</title>
+    <script>
+      
+    </script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+  <article>
+    <header>
+      <hgroup>
+        <h1>HTML5 Awesomesauce</h1>
+        <h2>All about localStorage</h2>
+      </hgroup>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="">About</a></li>
+        <li><a href="">Cookies</a>
+        </li>
+        <li><a href="">LocalStorage</a>
+        </li>
+        <li><a href="">SessionStorage</a></li>
+        <li><a href="">Cookies</a>
+      </li></ul>
+    </nav>
+    <section>
+      <div id="input">
+        <h2>Input section</h2>
+        <label for="localKey">Key</label>
+        <input type="text" name="localKey" id="localKey"/>
+        <label for="localValue">Value</label>
+        <input type="text" name="localValue" id="localValue"/>
+        <button id="save-local" onclick="saveLocal()">Save</button>
+      </div>
+      <div id="output">
+        <h2>Output section</h2>
+        <button id="clear-local" onclick="clearAll()">Clear</button>
+        <span id="localCount"></span><br/>
+        <ul id="listLocal">
+        </ul>
+      </div>
+    </section>
+    <aside>
+      <h2>Instructions</h2>
+      <ol>
+          <li>Save a key/value pair into the localStorage.</li>
+          <li>Remove a key/value pair from the localStorage using the key. </li>
+          <li>Remove every key/value pair from the localStorage</li>
+          <li>Iterate over the key/value pairs using their index.</li>
+          <li>Get the value of the current key/value pair</li>
+      </ol>
+</aside>
+    <footer>
+      <h2>HTML5 works on mobile.</h2>
+    </footer>
+    </article>
+  </body>
+</html>

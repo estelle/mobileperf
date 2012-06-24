@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/* CSS Document */
+
+div {
+  width: 402px;
+  height: 734px;
+  position:relative;
+  background-image: url(http://placekitten.com/g/200/200/);
+}
+div:after {
+  content: '';
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-image:url(iphone_mask_large.jpg);
+  -webkit-mask: url(iphone_mask_mask.png); 
+	
+}
+

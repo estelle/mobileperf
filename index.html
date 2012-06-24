@@ -1,0 +1,2172 @@
+<!DOCTYPE HTML>
+<html>
+<head> 
+    <!--[if gte IE 9]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]--> 
+    <!--[if lt IE 9]><meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" /><![endif]--> 
+<meta charset="utf-8" />
+    <title>Breaking the Mobile Web</title>
+<!--
+Made by: Estelle Weyl
+Copyright:  CC-SA-NC-BY - Creative Commons Attribution-NonCommercial-ShareAlike 
+-->    
+<style>
+:root {font-size: 125%;}
+div, section {background-repeat:no-repeat;}
+body {
+	font-family:Helvetica,  "Trebuchet MS",Arial, sans-serif, 'Droid Sans';
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0px; top: 0px;
+}
+.bigger {font-size: 120%;}
+
+#info {
+	font-size: small;
+	position: absolute;
+	bottom: 0px;
+	left: 40%;
+	z-index: 500;
+	color: #fff;
+}
+/* optional */
+#topinfo {
+	font-size: small;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	z-index: 500;
+}
+.key {
+	color: black;
+	display: inline-block;
+	padding: 3px 3px 3px 3px;
+	text-shadow: none;
+	letter-spacing: 0;
+	position: relative;
+	background: white;
+	border-radius: 5px;
+	font-weight: bold;
+	text-shadow: 0 0 1px currentColor;
+	}
+#presentation {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	display: block;
+	overflow: hidden;
+	font-family: Helvetica, Arial, sans-serif;
+	background-color: #C5CCD4;
+	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.70, #C5CCD4), color-stop(0.3, #CBD2D8));
+	background: -webkit-linear-gradient(0, #C5CCD4 0%, #C5CCD4 2px, #CBD2D8 2px, #CBD2D8 100%);
+	background: -moz-linear-gradient(0, #C5CCD4 0%, #C5CCD4 2px, #CBD2D8 2px, #CBD2D8 100%);
+	background: -ms-linear-gradient(0, #C5CCD4 0%, #C5CCD4 2px, #CBD2D8 2px, #CBD2D8 100%);
+	background: -o-linear-gradient(0, #C5CCD4 0%, #C5CCD4 2px, #CBD2D8 2px, #CBD2D8 100%);
+	background: linear-gradient(0, #C5CCD4 0%, #C5CCD4 2px, #CBD2D8 2px, #CBD2D8 100%);
+	-moz-background-size: 7px 7px;
+	background-size: 7px 7px;
+	background-repeat: repeat;
+}
+body > header, body > footer {
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 2rem;
+	position: absolute;
+	top: 0;
+	z-index: 500;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 50%, from(rgba(176, 188, 205, 1)), to(rgba(129, 149, 175, 1)));
+	background-image: -webkit-linear-gradient(top, #B0BCCD 50%, #8195AF 100%);
+	background-image: -moz-linear-gradient(top, #B0BCCD 50%, #8195AF 100%);
+	background-image: -ms-linear-gradient(top, #B0BCCD 50%, #8195AF 100%);
+	background-image: -o-linear-gradient(top, #B0BCCD 50%, #8195AF 100%);
+	background-image: linear-gradient(to bottom, #B0BCCD 50%, #8195AF 100%);
+	padding: 7px 10px;
+	background-color: #6D84A2;
+	display: block;
+	height: 42px;
+	border-bottom: 1px solid #2C3542;
+	border-top: 1px solid #CDD5DF;
+}
+body > header h1 {
+	color: white;
+	font-family: Helvetica;
+	font-size: 1.1rem;
+	font-weight: bold;
+	margin: auto;
+	overflow: hidden;
+	text-align: center;
+	text-overflow: ellipsis;
+	text-shadow: rgba(0, 0, 0, 0.4) 0px -1px 0px;
+	letter-spacing: -1px;
+	white-space: nowrap;
+	max-width: 400px;
+}
+
+
+.slides {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	position: absolute;
+	display: block;
+	-webkit-transition: -webkit-transform 1s ease-in-out;
+	-moz-transition: -moz-transform 1s ease-in-out;
+	-ms-transition: -ms-transform 1s ease-in-out;
+	-o-transition: -o-transform 1s ease-in-out;
+	transition: transform 1s ease-in-out;
+	-webkit-transform: scale(0.8);
+	-moz-transform: scale(0.8);
+	-ms-transform: scale(0.8);
+	-o-transform: scale(0.8);
+	transform: scale(0.8);
+}
+.slide {
+	display: none;
+	position: absolute;
+	overflow: hidden;
+	width: 900px;
+	height: 700px;
+	left: 50%;
+	top: 50%;
+	margin-top: -350px;
+	background-color: #eee;
+	-webkit-transition: all 0.25s ease-in-out;
+	-moz-transition: all 0.25s ease-in-out;
+	-ms-transition: all 0.25s ease-in-out;
+	-o-transition: all 0.25s ease-in-out;
+	transition: all 0.25s ease-in-out;
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
+	padding-left: 20px;
+	padding-top: 10px;
+	background-color: #ffffff;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 2px solid #A8ABAE;
+	
+}
+.slide.intro {
+	text-align: center;
+	font-size: 2rem;
+}
+
+.slide.intro header h1 {
+	font-size: 3rem;	
+}
+.slide.intro hgroup {
+	margin-top: 200px;
+}
+.slide textarea.mynotes {
+		-webkit-appearance: none;
+		border: 1px #aaa solid;
+		border-radius: 5px;
+		width: 100%;
+		font-size: 1.2rem;
+		font-style: italic;
+		box-shadow: inset 0 0 8px rgba(0,0,0,0.3);
+		padding: 5px;
+		box-sizing: border-box;
+		font-family:"Palatino Linotype", "Book Antiqua", Palatino, cursive,serif;
+	 }
+.content td {
+ 	border: 1px solid black;
+}
+.invalid {
+	background-color: red;
+}
+.slide.section,.slide.intro {
+	text-align: center;
+}
+.slide.section,.slide.intro header {
+	font-size: 2.5rem;
+}
+.slide li {
+    margin-bottom: 10px;
+}
+.slide img {
+	max-height: 90%;
+	text-align: center;
+}
+.slide .counter {
+	color: #999999;
+	position: absolute;
+	left: 20px;
+	bottom: 20px;
+	display: block;
+	font-size: 0.7rem;
+}
+.slide.title > .counter,
+.slide.segue > .counter,
+.slide.mainTitle > .counter {
+	display: none;
+}
+.force-render {
+	display: block;
+	visibility: hidden;
+}
+.slide.far-past {
+	display: block;
+	margin-left: -2400px;
+}
+.slide.past {
+	visibility: visible;
+	display: block;
+	margin-left: -1400px;
+}
+.slide.current {
+	visibility: visible;
+	display: block;
+	margin-left: -450px;
+}
+.slide.future {
+	visibility: visible;
+	display: block;
+	margin-left: 500px;
+}
+.slide.far-future {
+	display: block;
+	margin-left: 1500px;
+}
+
+/* Content */
+
+.slide header {
+	font-weight: normal;
+	letter-spacing: -.05em;
+	text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;
+	left: 30px;
+	top: 25px;
+	font-size: 2rem;
+}
+h1 {
+	font-size:2rem;
+	margin-bottom: 0px;
+}
+h2 {
+	font-size: 1.6rem;
+}
+h1:first-child {
+	margin-top: 0;
+}
+section, footer {
+	text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;
+	margin: 20px 30px 0;
+	display: block;
+	overflow: hidden;
+}
+footer {
+	font-size: 1rem;
+	margin: 20px 0 0 30px;
+}
+a {
+	color: inherit;
+	display: inline-block;
+	text-decoration: none;
+	line-height: 110%;
+}
+a, .em {
+	color: #E65F00;
+
+}
+a:hover {
+	text-decoration: underline;
+}
+pre {
+	text-align: left;
+	font-size: 1.1rem;
+	padding: 10px 20px;
+	background: rgba(218,218,220, 0.5);
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	border: 1px solid white;
+}
+pre b {
+	font-weight: normal;
+	color: #c61800;
+	text-shadow: #c61800 0 0 1px;
+/*letter-spacing: -1px;*/}
+pre em {
+	font-weight: normal;
+	font-style: normal;
+	color: #18a600;
+	text-shadow: #18a600 0 0 1px;
+}
+div.example {
+	display: block;
+	padding: 10px 20px;
+	background: rgba(255, 255, 255, 0.4);
+	border-radius: 8px;
+	margin-bottom: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+#presentation-counter {
+	color: #ccc;
+	font-size: 0.7rem;
+	letter-spacing: 1px;
+	position: absolute;
+	top: 40%;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+#next, 
+#back {
+	z-index: 1000;
+	position:absolute;
+	top: 5px;
+	left: 5px;
+	list-style-type: none;
+	-webkit-appearance: none;
+	border: none;
+	padding: 5px 10px;
+	letter-spacing:1px;
+	font-size: 1rem;
+	box-shadow: inset 0 0 2px rgba(0,0,0,0.3),
+	  2px 2px 5px rgba(0,0,0,0.7);
+	border: 3px solid #eee;
+	color: white;
+	text-decoration: none;
+	background-image: -webkit-gradient(linear, top, bottom, from(rgba(255, 255, 255, 0.4)), to(rgba(255, 255, 255, 0.1)));
+	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+	background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+	background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+	background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+	background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+	overflow: hidden;
+	max-width: 3rem;
+	white-space: nowrap;
+	font-family: Helvetica;
+	font-size: 14px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	height: 22px;
+	line-height: 22px;
+	padding: 0 10px;
+	-moz-background-size: 100% 50%;
+	background-size: 100% 50%;
+	background-repeat: no-repeat;
+	border: 1px solid #2F353E;
+	-moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+
+	float: right;
+	background-color: #2463DE;
+}
+#next {
+	left: auto; right: 5px;
+	background-color: #4A6C9B;
+	border-color: #2F353E #375073 #375073;
+}
+    
+.books {
+		-webkit-transform:scale(0.9);
+		-webkit-transform-origin: 0 0;}
+.books img {margin: 160px 15px 0 15px;}	
+
+h1.intro {
+	font-size: 3.8rem; 
+	margin: auto;
+	color: #E65F00;
+	}
+
+/* OBJECT PAGES */
+.object header {
+	position:absolute; 
+	top: 10px; 
+	width: 100%; 
+	text-align:center; 
+	background-color: rgba(255,255,255,0.9); 
+	left:0;
+}
+.objectlink {
+	position:absolute;
+	top:0; right:0;
+	color: white; 
+	background-color: #000; 
+	padding: 3px 5px; 
+	border: none;
+}
+.slide.object {padding:0;}
+.object object {width: 100%; height: 100%;}
+.notes, .temphidden {display: none;}
+
+.hidenotes {display: none;}
+
+.visible .hidenotes {
+	display: inherit;
+	font-size: inherit;
+	background-color: #DEDEDE;
+	padding: 5px;
+	font-weight: normal;
+	list-style-type: none;
+	cursor: none
+}
+.visibility li {cursor: pointer;}
+.half {opacity: .3;}
+p.link {float: right; font-weight: bold;}
+
+.columns2 {column-count: 2;}
+.credit {position:absolute; bottom: 10px; right: 10px; text-shadow: 0 0 4px rgba(255,255,255,0.5);}
+.big, .big * {font-size: 1.6rem;}
+.black {background-color: #000;}
+.black h1 {color: #fff;} 
+.black p {color: #fff; font-size: 1.6rem; }
+
+table {
+	margin: auto;
+	border: 1px solid #dedede;	
+	border-collapse: collapse;
+	border-spacing:0;
+}
+section td, section th {
+   border: none;
+   font-size: 30px; 
+   padding: 4px;
+}
+.th {
+	margin: 20px auto;	
+}
+.rowed tr:nth-of-type(even),  
+.rowed th,
+.th th {
+	background-color: #dedede;	
+}
+.th th,
+.th td {
+	padding: 10px;
+	border: 1px solid #bbb;
+}
+.th td {
+	text-align: center;
+	border: 1px solid #dedede;
+	border-collapse:collapse;
+}
+.htc {
+	color: #ffffff;
+	width: 320px;
+	background-color: #666;
+}
+.htc tbody {
+	max-height: 300px;
+	overflow:scroll;
+}
+.htc td, .htc th {
+	font-size: 14px;
+	padding: 2px 4px;
+}
+.htc thead {
+	background-image: -webkit-linear-gradient(top,
+		#333, #aaa, #333);
+}
+.htc tfoot tr td {color: #000;}
+.htc tbody tr:nth-of-type(odd) {font-weight: bold;}
+.htc tbody tr:nth-of-type(even) {color: #ccc;}
+
+.htc tbody tr:nth-of-type(4n-3),
+.htc tbody tr:nth-of-type(4n-2){
+	background-color: black;
+ }
+  
+ .htc tbody tr:nth-of-type(even) td{
+	padding-bottom: 4px;
+ }
+ .htc tbody tr:nth-of-type(odd) td{
+	padding-top: 4px;
+ }
+ 
+ .onehundred{ padding: 10px; background-color: #dedede;}
+.onehundred img { margin:5px;}
+.onehundred span {
+	display:inline-block; 
+	text-align:center;
+	font-size: 40px;
+	margin: 5px;
+}
+.whitened {
+		border-radius: 20px; 
+		background-color:rgba(255,255,255,0.6); 
+		text-shadow: 1px 1px #fff; 
+		float: left; 
+		padding: 10px;	
+	}
+	 #largegradient:hover {
+		background-image:url(images/hugegradient.jpg);
+		background-position: -125px -26px;	
+	}
+@media print {
+	.slide {
+		page-break-inside: avoid;
+		page-break-after: always;
+		visibility: visible !important;
+		font-size: 20pt;
+		font-family: Arial, sans-serif;
+	}
+	@page {
+		size: landscape;
+	}
+	body {
+		font-size: 12pt;
+		background: white;
+	}
+	header h1 {
+		border-top: 2pt solid gray;
+		border-bottom: 1px dotted silver;
+	}
+	#presentation-counter, #info, #topinfo, .counter {
+		display: none
+	}
+}
+</style>
+</head> 
+
+<body> 
+<header>
+<nav>
+<h1>Breaking the Mobile Web</h1>
+<ul>
+	<li class="button cancel" id="back">Back</li>
+    <li class="button done" id="next">Next</li>
+</ul>
+</nav>
+</header>
+<!-- Top instructions -->
+<div id="topinfo"></div>
+<!-- footer instructions -->  
+<div id="info">
+    <p><a href="http://standardista.com">Estelle Weyl</a> | <a href="http://twitter.com/estellevw">@estellevw</a> | <a href="http://github.com/estelle">Github</a> | Press <span class="key">&rarr;</span> to advance, <span class="key">2</span> for comments, <span class="key">4</span> to read/write notes.</p>
+</div>
+
+  <div id="presentation">
+   <div id="presentation-counter"></div>
+   <div id="slides">
+    <div class="slide"> 
+   <h1 class="intro">Breaking the Mobile Web</h1>
+   <div class="books">
+       <img src="http://akamaicovers.oreilly.com/images/9780980846904/cat.gif" alt="HTML5 and CSS3 for the Real World">
+       <img src="http://akamaicovers.oreilly.com/images/0636920018063/cat.gif" alt="HTML5: The Definitive Guide"/>
+       <img src="http://akamaicovers.oreilly.com/images/0636920021711/cat.gif" alt="MObile HTML5"/>
+       <img src="http://akamaicovers.oreilly.com/images/0636920025955/cat.gif" alt="Web Performance Daybook"/>
+   </div>
+    <br style="clear:both;">Slides: <a href="http://estelle.github.com/mobileperf">estelle.github.com/mobileperf</a>
+    <br/>Name: Estelle Weyl
+    <br>Blog: <a href="http://standardista.com">standardista.com</a>
+    <br>Twitter: <a href="http://twitter.com/estellevw">@estellevw</a></p>
+</div> 
+    
+    
+    
+<div class="slide normal"> 
+    <header><h1>How this slide deck works</h1></header> 
+    <section class="content"> 
+        <p>Click on the #4 to show some notes stored with local storage</p>
+        <p>Press <span class="key">&rarr;</span> to advance and show next comments</p>
+        <p>Press <span class="key">&larr;</span>  to go back</p>
+        <p>Or navigation with buttons or browser history</p>
+        <p>Files will be at <a href="http://estelle.github.com/mobileperf">estelle.github.com/mobileperf</a></p>
+    </section>
+</div> 
+ 
+  
+
+ 
+ <!-- Table of Contents -->
+<div class="slide normal" style="background-image:url(images/telephonecans.jpg); background-position:80% bottom; background-repeat:no-repeat;">
+     <header>
+      <h1>Device limitations!</h1>
+      
+     </header> 
+     <section>
+     <ul class="big">
+        <li>Battery</li>
+     	<li>Latency</li>
+        <li>Memory</li>
+        <li>Responsiveness</li>
+     </ul>
+     <h2>Phones aren't Laptops</h2>
+     </section>
+    </div>
+        
+<!-- BATTERY -->
+<div class="slide normal">
+     <header><h1>Batteries</h1>
+     </header> 
+     <section style="background-image:url(images/carbattery.jpeg) , url(images/battery.jpg); background-position: bottom left, 80% 90%; background-size: auto, 130px;height:600px;"> 
+     
+     </section>
+    </div>
+ 
+ <div class="slide object"> 
+<object data="http://www2012.org/proceedings/proceedings/p41.pdf"></object>
+     <header><h1>Who Killed My Battery</h1></header> 
+     <a href="http://www2012.org/proceedings/proceedings/p41.pdf" class="objectlink" target="_foo">Download PDF</a>
+ </div>   
+   
+ <div class="slide intro"> 
+     <header><h1 class="em" style="font-size: 7rem; margin:150px auto">TL;DR;</h1></header> 
+     
+ </div>  
+      
+      
+<div class="slide normal"> 
+     <section class="content">
+
+<h2>Images</h2>
+<ul>
+<li>JPEGs performs better than GIFs and PNGs</li>
+<li>Image energy usage</li>
+<li>Energy used to render images is proportional quantity and size of images.</li>
+</ul>
+<h2>JavaScript</h2>
+<ul>
+<li>JS (and CSS) can be as expensive to render as IMG</li>
+<li>Dynamic JS (like XMLHttpRequest) increases rendering cost (can't be cached). </li>
+<li>JS (download, parsing &amp; executing) can be most energy consuming web pages component
+<ul class="temphidden" style="margin-top: 1em;">
+<li>Webpages load large Javascript ﬁles for rendering the web page even though not all of the script is used by the
+
+page.</li>
+<li>
+Shrinking Javascript on a mobile
+
+page to contain only functions used by the page greatly reduces
+
+energy use.</li><li> Using Javascript libraries simpliﬁes web
+
+development, but increases the energy used by the resulting pages</li></ul></li></ul>
+   </section>
+ </div>      
+      
+
+ 
+ <!-- Gradients - light burst -->
+<div class="slide normal" style="padding:0; overflow:hidden" id="bursts">
+     <object data="bursts.html" style="height:100%; width:100%; border-radius: 18px">
+     <header>
+      <h1>Gradients</h1>
+     </header> 
+     <section>
+     <a href="bursts.html" target="_blank">See Redial Gradients in Action</a>
+     </section>
+     </object>
+    </div>      
+    
+    
+            
+<!-- Battery consumption -->
+<div class="slide normal" style="background-image:url(images/batteries.jpg); background-size: cover;">
+     <header>
+      <h1 style="color: #ffffff; font-size: 80px; -webkit-text-stroke: 1px #F00;">Battery Consumption</h1>
+     </header> 
+     <section>
+     <div  class="whitened big" style="float: none; background-color: rgba(255,255,255,0.8); padding:20px;  margin-bottom: 40px; ">
+     <p>CPU Drains the battery. Avoid using it!</p>
+     <ul>
+     	<li>Avoid Reflows (and repaints)</li>
+     	<li>Minimize JavaScript (size and activity)</li>
+     	<li>No JavaScript Animations</li>
+        <li>Avoid WebGL</li>
+        <li>Implement what you learn today</li>
+        <li>Avoid loading resources you don't need</li>
+        <li>Manage memory</li>
+     </ul>
+     </div>
+     <footer class="credit">Image Credit: <a href="http://naiksaneet.wordpress.com">naiksaneet.wordpress.com</a></footer>
+     </section>
+    </div>
+ 
+ 
+ 
+<!-- TERM:  Latency -->
+<div class="slide intro" style="background:url(images/latencykills.jpg) bottom center no-repeat #ffffff;">
+     <header>
+      <h1>Latency</h1>
+     </header>
+     <section> 
+     <footer class="credit">Photo: <a href="http://www.flickr.com/photos/tby/1472668838/">T Bryce Yehl</a></footer>
+     </section>
+    </div>
+    
+    
+ 
+ <!--YSLOW -->
+<div class="slide normal">
+  <header>
+    <h1>YSLOW<img src="images/yslow.png" alt="" style="vertical-align:middle;  margin-left: 20px;"></h1>
+  </header> 
+  <section> 
+  <ul class="visibility">
+    <li>Make fewer HTTP requests
+    <p class="hidenotes">Decreasing the number of components on a page reduces the number of HTTP requests required to render the page, resulting in faster page loads. Some ways to reduce the number of components include: combine files, combine multiple scripts into one script, combine multiple CSS files into one style sheet, and use CSS Sprites and image maps.</p>
+    </li>
+    
+    <li>Avoid empty src or href
+    <p class="hidenotes">You may expect a browser to do nothing when it encounters an empty image src. However, it is not the case in most browsers. IE makes a request to the directory in which the page is located; Safari, Chrome, Firefox 3 and earlier make a request to the actual page itself. This behavior could possibly corrupt user data, waste server computing cycles generating a page that will never be viewed, and in the worst case, cripple your servers by sending a large amount of unexpected traffic.</p>
+    </li>
+    
+    <li>Compress components with gzip
+    <p class="hidenotes">Compression reduces response times by reducing the size of the HTTP response. Gzip is the most popular and effective compression method currently available and generally reduces the response size by about 70%. Approximately 90% of today's Internet traffic travels through browsers that claim to support gzip.</p></li>
+    <li>Put CSS at top 
+    <p class="hidenotes">Moving style sheets to the document HEAD element helps pages appear to load quicker since this allows pages to render progressively.</p>
+    </li>
+    
+    <li>Put JavaScript at bottom
+     <p class="hidenotes">JavaScript scripts block parallel downloads; that is, when a script is downloading, the browser will not start any other downloads. To help the page load faster, move scripts to the bottom of the page if they are deferrable.</p>
+     </li>
+    
+    <li>Avoid CSS expressions
+    <p class="hidenotes">CSS expressions (supported in IE beginning with Version 5) are a powerful, and dangerous, way to dynamically set CSS properties. These expressions are evaluated frequently: when the page is rendered and resized, when the page is scrolled, and even when the user moves the mouse over the page. These frequent evaluations degrade the user experience.
+    </p>
+    </li>
+    
+    <li>Reduce DNS lookups
+    <p class="hidenotes">The Domain Name System (DNS) maps hostnames to IP addresses, just like phonebooks map people's names to their phone numbers. When you type URL www.yahoo.com into the browser, the browser contacts a DNS resolver that returns the server's IP address. DNS has a cost; typically it takes 20 to 120 milliseconds for it to look up the IP address for a hostname. The browser cannot download anything from the host until the lookup completes.
+    </p>
+    </li>
+    
+    <li>Minify JavaScript and CSS
+    <p class="hidenotes">
+    Minification removes unnecessary characters from a file to reduce its size, thereby improving load times. When a file is minified, comments and unneeded white space characters (space, newline, and tab) are removed. This improves response time since the size of the download files is reduced.
+    </p>
+    </li>
+    
+    <li>Avoid URL redirects
+    <p class="hidenotes">
+    URL redirects are made using HTTP status codes 301 and 302. They tell the browser to go to another location. Inserting a redirect between the user and the final HTML document delays everything on the page since nothing on the page can be rendered and no components can be downloaded until the HTML document arrives.
+    </p></li>
+    
+    <li>Remove duplicate JavaScript and CSS
+    <p class="hidenotes">
+    Duplicate JavaScript and CSS files hurt performance by creating unnecessary HTTP requests (IE only) and wasted JavaScript execution (IE and Firefox). In IE, if an external script is included twice and is not cacheable, it generates two HTTP requests during page loading. Even if the script is cacheable, extra HTTP requests occur when the user reloads the page. In both IE and Firefox, duplicate JavaScript scripts cause wasted time evaluating the same scripts more than once. This redundant script execution happens regardless of whether the script is cacheable.
+    </p></li>
+    
+    <li> Reduce the number of DOM elements
+    <p class="hidenotes">
+    A complex page means more bytes to download, and it also means slower DOM access in JavaScript. Reduce the number of DOM elements on the page to improve performance.</p>
+    </li>
+    
+    <li>Avoid HTTP 404 (Not Found) error
+    <p class="hidenotes">Making an HTTP request and receiving a 404 (Not Found) error is expensive and degrades the user experience. Some sites have helpful 404 messages (for example, "Did you mean ...?"), which may assist the user, but server resources are still wasted.</p></li>
+    
+    
+    <li> Avoid AlphaImageLoader filter
+     <p class="hidenotes">The IE-proprietary AlphaImageLoader filter attempts to fix a problem with semi-transparent true color PNG files in IE versions less than Version 7. However, this filter blocks rendering and freezes the browser while the image is being downloaded. Additionally, it increases memory consumption. The problem is further multiplied because it is applied per element, not per image.
+    </p>
+    </li>
+    
+    <li>Do not scale images in HTML
+     <p class="hidenotes">Web page designers sometimes set image dimensions by using the width and height attributes of the HTML image element. Avoid doing this since it can result in images being larger than needed. For example, if your page requires image myimg.jpg which has dimensions 240x720 but displays it with dimensions 120x360 using the width and height attributes, then the browser will download an image that is larger than necessary.</p></li>
+    
+    <li>Make favicon small and cacheable
+    <p class="hidenotes">A favicon is an icon associated with a web page; this icon resides in the favicon.ico file in the server's root. Since the browser requests this file, it needs to be present; if it is missing, the browser returns a 404 error (see "Avoid HTTP 404 (Not Found) error" above). Since favicon.ico resides in the server's root, each time the browser requests this file, the cookies for the server's root are sent. Making the favicon small and reducing the cookie size for the server's root cookies improves performance for retrieving the favicon. Making favicon.ico cacheable avoids frequent requests for it.
+    </p>
+    </li>
+</ul>
+
+    <footer>
+      <p class="link">Download and install  <a href="http://developer.yahoo.com/yslow/">YSlow</a></p>
+      <p class="half">Click list item for details.</p> 
+    </footer>
+</section>
+</div> 
+    
+    
+
+<!-- Page Speed -->
+<div class="slide normal"> 
+  <header>
+    <h1>Page Speed <img src="images/pagespeed.png" alt="" style="vertical-align:middle; margin: 0 0 0 20px" ></h1>
+  </header> 
+  <section class="content columns"> 
+   <ul class="columns2">
+        <li>Leverage browser caching</li>
+        <li>Enable compression</li>
+        <li>Defer parsing of JavaScript</li>
+        <li>Minimize request size</li>
+        <li>Specify a cache validator</li>
+        <li>Optimize images</li>
+        <li>Minify JavaScript</li>
+        <li>Minify HTML</li>
+        <li>Specify image dimensions</li>
+        <li>Specify a character set</li>
+        <li>Specify a Vary: Accept-Encoding header</li>
+        <li>Reduce request serialization</li>
+        <li>Eliminate unnecessary reflows</li>
+        <li>Avoid long-running scripts</li>
+        <li>Avoid CSS @import</li>
+        <li>Avoid bad requests</li>
+        <li>Enable Keep-Alive</li>
+        <li>Make landing page redirects cacheable</li>
+        <li>Minify CSS</li>
+        <li>Minimize redirects</li>
+        <li>Optimize the order of styles and scripts</li>
+        <li>Put CSS in the document head</li>
+        <li>Remove query strings from static resources</li>
+        <li>Serve resources from a consistent URL</li>
+        <li>Serve scaled images</li>
+    </ul>
+    <footer><a href="http://code.google.com/speed/page-speed/">Google Page Speed Tools</a></footer>
+  </section>
+</div>
+   
+<div class="slide normal"> 
+<header><h1>What that means....</h1></header> 
+<section class="content"> 
+<pre contenteditable style="font-size: 1.4rem;">&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+ &lt;head&gt;
+   &lt;meta charset=&quot;UTF-8&quot;&gt;
+   &lt;title&gt;Titles are good for SEO&lt;/title&gt;
+   &lt;link rel=&quot;stylesheet&quot; href=&quot;prettyWhenItLoads.<strong>css</strong>&quot;/&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+   &lt;!-- lots of good content --&gt;
+   &lt;script src=&quot;dontBlockHTMLandCSS.<strong>js</strong>&quot;&gt;&lt;/script&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+</section>
+</div>
+  
+ 
+
+  
+<!-- Normal DNS -->
+<div class="slide normal">
+     <header>
+      <h1>DNS / HTTP Requests </h1>
+     </header> 
+     <section>
+     <img src="images/simpledns.gif" style="margin: 40px auto; display: block" alt="COmputer asks DNS server for IP address, then goes to IP to get website" />
+     <p style="text-align:center; position:absolute; bottom: 40px; width: 100%;">Each host is a different lookup!!</p>
+     </section>
+    </div>
+    
+<!-- Mobile DNS -->
+<div class="slide normal">
+    <header>
+    	<h1>Latency</h1>
+    </header> 
+    <section>
+        <img src="images/latency.gif" style="margin: 40px auto" alt="Computer asks DNS server for IP address, then goes to IP to get website" />
+       
+    </section>
+</div>
+
+
+
+<div class="slide object">
+     <object data="http://stevesouders.com/mobileperf/"></object>
+     <header><h1>Mobile Performance Bookmarklet</h1></header>
+     <a href="http://stevesouders.com/mobileperf/mobileperfbkm.php" class="objectlink">SteveSounders</a> 
+ </div>
+      
+ 
+ 
+<div class="slide">
+	<header>
+         <h1>Weinre</h1>
+    </header>
+      <section>
+        <ol>
+        <li>Download &amp; Install <a href="http://nodejs.org">Node.js</a> (includes NPM)</li>
+        <li>Install Weinre
+              <pre contenteditable>npm -g install weinre</pre>
+        </li>
+        <li>Start Weinre
+        <pre contenteditable>weinre</pre>
+        </li>
+        <li>Add Weinre to web page
+            <pre contenteditable>&lt;script src="http://localhost:8080/target/target-script-min.js#anonymous"&gt;&lt;/script&gt;</pre>
+        </li>
+        <li>Open the inspector
+            <pre contenteditable>http://localhost:8080/client/</pre>
+        </li>
+        </ol>
+  </section>
+</div> 
+
+
+
+<div class="slide normal" style="background-image:url(images/shadow.gif); background-position: right top;"> 
+     <header><h1>Adobe Shadow</h1></header> 
+     <section class="content">
+     <ul>
+     	<li><a href="http://labs.adobe.com/downloads/shadow.html">Download Adobe Shadow</a> desktop application</li>
+        <li>If you're on Windows 7, you might also have to download and install bonjour.</li>
+        <li>Download and install the <a href="https://chrome.google.com/webstore/detail/ijoeapleklopieoejahbpdnhkjjgddem">Adobe Shadow Chrome Extension</a> browser plugin</li>
+        <li>Install the mobile app on each of your devices (free in the app stores)</li>
+        <li>Run the application on your desktop, then minimize the window</li>
+        
+        <li>Open the browser extension in Chrome and turn it on</li>
+        <li>Run the application in your devices <ul><li>Click on your desktop when found</li></ul></li>
+        <li>Enter the "pairing" number given by the phone into the Chrome extension pop up window</li>
+        </ul>
+        <img src="images/shadowextension.gif" alt="Adobe Shadow browser extension" style="float:left; margin-right:20px"/>
+        <p>Basically, Weinre on crack</p>
+     </section>
+ </div>
+ 
+
+
+<div class="slide object">
+     <object data="http://webwait.com/"></object>
+     <header><h1>How long to load your page?</h1></header>
+     <a href="http://waitwait.com" class="objectlink">WebWait.com</a> 
+ </div>
+
+
+
+<!-- Mobile DNS -->
+<div class="slide normal">
+    <header>
+    	<h1>Latency</h1>
+    </header> 
+    <section>
+        <img src="images/latency.gif" style="margin: 40px auto" alt="Computer asks DNS server for IP address, then goes to IP to get website" />
+        <ul>
+            <li><strong>Issue:</strong> Requests take longer to complete</li>
+            <li><strong>Solution:</strong> Reducing requests improves performance</li>
+            <!--<li><strong>Web Standards AntiPattern:</strong> Embed CSS and JS (<a href="http://m.bing.com">m.Bing.com</a>)</li>-->
+        </ul>
+    </section>
+</div>
+  
+
+
+<div class="slide normal"> 
+<header><h1>Best Practices (for desktop)</h1></header> 
+<section class="content"> 
+<pre contenteditable style="font-size: 1.4rem;">&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+ &lt;head&gt;
+   &lt;meta charset=&quot;UTF-8&quot;&gt;
+   &lt;title&gt;Titles are good for SEO&lt;/title&gt;
+   <strong>&lt;link rel=&quot;stylesheet&quot; href=&quot;prettyWhenItLoads.<strong>css</strong>&quot;/&gt;</strong>
+ &lt;/head&gt;
+ &lt;body&gt;
+   &lt;!-- lots of good content --&gt;
+  <strong> &lt;script src=&quot;dontBlockHTMLandCSS.<strong>js</strong>&quot;&gt;&lt;/script&gt;</strong>
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+</section>
+</div>
+
+<div class="slide normal"> 
+<header><h1>Reduce HTTP requests</h1></header> 
+<section class="content"> 
+<pre contenteditable style="font-size: 1.4rem;">&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+ &lt;head&gt;
+   &lt;meta charset=&quot;UTF-8&quot;&gt;
+   &lt;title&gt;Titles are good for SEO&lt;/title&gt;
+   <strong>&lt;style id="keyword"&gt;
+     /* lots of styles */
+   &lt;/style&gt;</strong>
+ &lt;/head&gt;
+ &lt;body&gt;
+   &lt;!-- lots of good content --&gt;
+   <strong>&lt;script id="otherKey"&gt;
+     /* JS that makes site work
+   &lt;/script&gt;</strong>
+   <span class="temphidden em"><img src="images/bingkb.gif" class="temphidden" style="float: right; position:relative; top: -200px;"/><strong>&lt;script&gt;
+     /* localStorage &amp;  cookies script*/
+   &lt;/script&gt;</strong></span>
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+</section>
+</div>
+
+<!-- Bing process -->
+<div class="slide normal" style="background-image:url(images/cookies.gif); background-size: 140%; background-position:left 100px">
+    <header>
+    	<h1>LocalStorage &amp; Cookies</h1>
+    </header> 
+    <section>
+    </section>
+</div>
+ 
+ 
+<!-- Naughty: Bing Rules -->
+<div class="slide normal" style="background-image:url(images/hamburger.jpg); background-position: 98% 95%;">
+    <header>
+    	<h1>Best practices anti-pattern can be a best practice</h1>
+    </header> 
+    <section> 
+    
+        <ul class="bigger">
+        	<li>Embed CSS &amp; JS for 1st page load</li>
+            <li>Extract &amp; put in LocalStorage</li>
+            <li>Set Cookies with script names</li>
+            <li>Next GET: cookies checked</li>
+            <li>Only embed new scripts</li>
+            <li>Load localStorage resources on load</li>
+            <li class="em">Use Data URIs</li>
+        </ul>
+        <p class="bigger" style="font-style:italic">Single http request for html, css, js &amp; images</p>
+        <footer class="credit">Photo: <a href="http://s440.photobucket.com/profile/cdma69/index">cdma69</a></footer> 
+    </section>
+</div>
+
+
+
+
+<div class="slide" id="web-storage"> 
+          
+          <header> <h1>localStorage</h1></header> 
+          <section> 
+<pre contenteditable> 
+saveButton.addEventListener('click', function () {
+  window.<b>localStorage</b>.<b>setItem(</b>'value', textarea.value<b>)</b>;
+}, false);
+textarea.value = window.<b>localStorage</b>.<b>getItem(</b>'value'<b>)</b>;
+window.localStorage.<b>clear()</b>;
+</pre> 
+            <p id="localstorage-message">Save text value on the client side (crash-safe)</p> 
+            <textarea id="ls" placeholder="Type your text here..."></textarea> 
+            <input type="button" value="save" id="savelocalstorage" class="button"/>
+            <input type=button id="savelocalstorage" class="button" onClick="window.open('localstorageiframe.html', 'ls', 'width=200,height=200')" value="Open Test"/>
+            <input type="button" value="Clear" id="clearLocalstorage" class="button"/> 
+            <p id="lsLog"></p>
+           
+ <pre contenteditable>var el = document.querySelector('#myID');
+<span class="half">// place content from local storage on load if there is one</span>
+el.innerHTML = window.localStorage.<b>getItem</b>('value');</pre> 
+    
+    <pre contenteditable>var items = window.localStorage.<strong>length</strong>;
+var lastItem = window.localStorage.key(items-1);
+localStorage.<b>removeItem(</b>'timestamp'<b>)</b>;</pre>
+<script defer> 
+  (function(){
+	// if local storage not supported, quit
+	try {
+	  (window.localStorage.getItem) 
+	} catch(e){
+	  return; 
+	}
+
+	var textarea = document.querySelector('#ls');
+	
+	
+	// place content from local storage on load if there is one
+	if (!textarea.value) {
+	  textarea.value = window.localStorage.getItem('value');
+	}
+	
+	updateLog(false);
+	
+	
+	// your content will be saved locally
+	document.querySelector('#clearLocalstorage').addEventListener('click', function () {
+	  window.localStorage.clear();
+	}, false);
+	
+	
+	document.querySelector('#savelocalstorage').addEventListener('click', function () {
+	  window.localStorage.setItem('value', textarea.value);
+	  window.localStorage.setItem('timestamp', (new Date()).getTime());
+	  updateLog(true);
+	}, false);
+
+	function updateLog(new_save) {
+	  var log = document.querySelector("#lsLog");
+	  var delta = 0;
+	  if (window.localStorage.getItem('value')) {
+		delta = ((new Date()).getTime() - (new Date()).setTime(window.localStorage.getItem('timestamp'))) / 1000;
+		if (new_save) {
+		  log.textContent = 'Saved. Content will be available after browser refresh/reopen.';
+		  setTimeout(function() {
+			log.textContent = '';
+		  }, 3000);
+		} else {
+		  log.textContent = 'last saved: ' + delta + 's ago';
+		}
+	  }
+	}
+
+  })();  
+</script> 
+</section> 
+</div> 
+
+
+
+
+<div class="slide normal"> 
+<header><h1>Local Storage</h1></header> 
+<section class="content">
+<p>Add content</p> 
+<pre contenteditable>localStorage.setItem(key,value);</pre>
+<p>Retrieve content</p>
+<pre contenteditable>localStorage.getItem(key);</pre>
+<p>Delete a single entry</p>
+<pre contenteditable>localStorage.removeItem(key);</pre>
+<p>How much content?</p>
+<pre contenteditable>localStorage.length</pre>
+<p>Clear all entries</p>
+<pre contenteditable>localStorage.clear()</pre>
+</section>
+</div> 
+ 
+  
+
+
+
+
+
+
+
+<div class="slide normal"> 
+     <header><h1>Local Storage Code Lab</h1></header> 
+     <section class="content"> 
+     <div style="height:550px; overflow:scroll">
+     <p>In this lab, we are going to play with the localStorage object. The user is going to be able to save, read and delete
+
+key/value pair from the localStorage</p>
+
+<ol>
+<li>In your labs folder, open the web_storage folder and edit the script.js ﬁle</li>
+
+<li>In the code, look for a // TODO 1. What we need to do here is to save a key/value pair into the localStorage.
+
+In this function, the key and the value entered by the user have been obtained (variables localKey and localValue)</li>
+
+<li>Look for a // TODO 2. What we need to do here is to remove a key/value pair from the localStorage using
+
+the key. The key is passed to the function you are editing with the variable key</li>
+
+<li> Look for a // TODO 3. What we need to do here is to remove every key/value pair from the localStorage</li>
+
+<li> Look for a // TODO 4. Here we want to iterate over the key/value pairs using their index. Thanks to the index,
+
+get the key of a key/value pair</li>
+
+<li> Look for a // TODO 5. Thanks to the key you have just got, get the value of the current key/value pair</li>
+
+<li> You should be done by now. Open index.html in a browser and try to add, see, and delete key/value pairs from
+
+the localStorage</li></ol>
+     </div><a href="web_storage.zip" target="play">Files</a> - <a href="web_storage/solution/index.html" target="play">Solution</a>
+     </section>
+ </div> 
+
+
+
+ 
+<div class="slide object"> 
+<object data="web_storage/solution/index.html"></object>
+     <header><h1>Local Storage CodeLab</h1></header> 
+     <a href="web_storage/solution/index.html" target="play">Solution</a>
+ </div>
+
+
+
+<!-- TERM: Memory -->
+<div class="slide intro black" style="background-image:url(images/memory.gif); background-position: bottom;">
+    <header>
+    	<h1>Memory</h1>
+    </header> 
+    <section  style="padding-top: 200px;">
+    	<p class="temphidden">High memory usage causes a slow UI</p>
+    	<p class="temphidden">When you are out of memory, you are out of memory</p>
+        <p class="temphidden">Browser crashes to free up memory</p>
+    </section>
+</div>
+      
+<!-- Device Memory: CPU comparison -->
+<div class="slide normal"> 
+ <header><h1>Memory</h1></header> 
+ <section> 
+    <table class="rowed">
+    <thead>
+    <tr>
+        <th>Device</th>
+        <th>Memory</th><th></th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr><td>iPhone 3G</td><td>128MB</td><td rowspan="6"><img src="images/iphone.jpg" width="40" alt="iphone"><br>
+        <img src="images/htcinspire.jpg"width="40" alt="htc inspire"><br>
+        <img src="images/ipad.jpg"width="40" alt="iPad"></td></tr>
+        <tr><td>iPhone 3GS</td><td>256 MB</td></tr>
+        <tr><td>HTC Inspire</td><td>768 MB</td></tr>
+        <tr><td>iPad 1</td><td>256 MB</td></tr>
+        <tr><td>iPod Touch (4)</td><td>256 MB</td></tr>
+        <tr><td>MacBook Pro</td><td>8 GB</td></tr>
+    </tbody>
+    </table>
+<p class="notes" style="padding-top: 40px"><strong>Mobile Norm:</strong> 512MB of RAM, with 1GHz Processor</p>
+<p class="notes"><strong>PC Norm:</strong> 8GB+ RAM  </p>
+<h2 class="notes" class="text-align: center;">Developing without mobile in mind <br>
+leads to sloppy App Dev</h2>
+ </section>
+</div>
+   
+<!-- HTC Inspire: How much CPU is used without anything running-->
+<div class="slide normal"> 
+     <header><h1>Browser shares Memory</h1></header> 
+     <section> 
+    <table class="htc">
+    <thead><tr><td colspan="3">Running Services</td></tr></thead>
+    <tfoot><tr><td style="background-color:#FCC">Other</td><td colspan="2" style="background-color:#6C9">73MB Avail: 255MB + 182MB in 21</td></tr></tfoot>
+    <tbody>
+    	<tr><td colspan="2">Calendar</td><td>8.4MB</td></tr>
+        <tr><td colspan="3">Process:com.htc.bgp</td></tr>
+        
+    	<tr><td rowspan="2"></td><td>ObexService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+        
+    	<tr><td colspan="2">AT&amp;T Navigator</td><td>8.4MB</td></tr>
+        <tr><td colspan="3">Process: com.telnav.app.android.congular</td></tr>
+        
+    	<tr><td rowspan="2"></td><td>ResoucePreLoader</td><td>Restarting</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+        
+        
+    	<tr><td colspan="2">AT&amp;T Spots</td><td>2.4MB</td></tr>
+        <tr><td colspan="3">Process: com.matchboxmobile.wasp</td></tr>
+        
+    	<tr><td rowspan="2"></td><td>WispService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+        
+        
+        
+    	<tr><td colspan="2">Media</td><td>4.1MB</td></tr>
+        <tr><td colspan="3">Process: android.process.media</td></tr>
+        
+    	<tr><td rowspan="2"></td><td>DownloadService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+        
+    
+        
+    	<tr><td colspan="2">PVWmdrmService</td><td>2.2MB</td></tr>
+        <tr><td colspan="3">Process: com.pv.wmdrmservice</td></tr>
+        
+    	<tr><td rowspan="2"></td><td>PVWmdrmService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+    </tbody>
+    </table>
+     </section>
+    </div> 
+   
+<!--GZip does not suffice -->
+<div class="slide normal">
+     <header>
+      <h1>Not enough to <big>GZip</big></h1>
+     </header> 
+     <section class="big"> 
+     
+     <p style="margin: 0 -20px;"><img src="images/gzipbig.png" alt="" style="vertical-align:middle">
+    <img src="images/arrow.png" alt="" style="vertical-align:middle">
+     <img src="images/gzipsmall.jpg" alt="" style="vertical-align:middle">
+     <img src="images/arrow.png" alt="" style="vertical-align:middle">
+     <img src="images/gzipbig.png" alt="" style="vertical-align:middle"></p>
+     <p style="text-align:center;" class="em">Rendered media are still the same size.</p>
+     <ul class="sevenless">
+       <li>         Reduce File Size       </li>
+       <li>         Reduce Image Size       </li>
+     </ul>
+     <p class="notes">Video, Audio, Images and Text can be compressed to save bandwidth, but they're uncompressed in the browser.</p>
+     </section>
+    </div>
+    
+<!-- Reduce File Size - ImageAlpha -->
+<div class="slide normal">
+     <header>
+      <h1>Reduce File Size</h1>
+     </header> 
+     <section> 
+     
+     <img src="images/imagealpha.jpg" alt="images alpha saving 64% file size" width="700" style="margin:auto; display:block">
+     <h1>Image Alpha <img src="images/ImageAlpha_med.png" alt="" style="vertical-align:middle"></h1>
+     <footer class="credit"><a href="http://pngmini.com/">www.pngmini.com/</a></footer>
+     </section>
+    </div>
+      
+     
+<!-- Reduce Image Size - Sencha IO-->
+<div class="slide normal">
+    <header>
+    	<h1>Reduce Image Size</h1>
+    </header> 
+    <section style="background:url(images/tinySrc.jpg) top no-repeat; min-height:500px; background-size: contain; padding:20px;"> 
+    <p style="color:#fff; padding-top: 40px; line-height: 1.4;text-shadow:1px 1px 3px #000,-1px -1px 3px #000; font-weight:bold;">Don't send <big>big</big> images to <small>small</small> screens?<br>
+Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
+    <ul style="font-size: 30px; line-height:2; float:left; padding: 10px; background-color: rgba(0,0,0,0.5); border-radius: 20px; margin-top: 100px; list-style-type:none;">
+        <li><a href="http://i.tinysrc.mobi/http://kittenssite.com/kitten.jpg"  target="play">http://i.tinysrc.mobi/http://kittenssite.com/kitten.jpg</a></li>
+        <li><a href="http://src.sencha.io/http://kittenssite.com/kitten.jpg" target="play">http://src.sencha.io/http://kittenssite.com/kitten.jpg</a></li>
+        <li><a href="http://src.sencha.io/320/480/http://kittenssite.com/kitten.jpg" target="play">http://src.sencha.io/320/480/http://kittenssite.com/kitten.jpg</a></li>
+    </ul>
+    <img src="images/senchio.gif" alt="sencha uses user agent sniffing,not browser size" class="temphidden" style="position: absolute; right: 10px; top: 200px;"/>
+    <p class=" half">Change your user agent and click on links above</p>
+   <footer class="credit">Photo: <a href="http://www.hdwallpapers4ipad.com/photo/abstract_backgrounds/broken_screen/2-0-1568">hdwallpapers4ipad.com</a></footer>	
+    </section>
+</div>
+   
+<!-- Reduce File Size - JPG not PNG, with Masking -->
+<div class="slide normal">
+     <header>
+      <h1>CSS Masking</h1>
+     </header> 
+     <section> 
+     
+     <p class="onehundred">
+     <img src="images/frame.jpg" alt="jpeg" width="160">
+     <img src="images/plus.gif" alt="plus" width="100">
+     <img src="images/framemask.png" alt="framemask" width="160">
+     <img src="images/lessthan.gif" alt="less than" width="100">
+     <img src="images/frame2.png" alt="transparent png" width="160"><br>
+     <span style="width: 160px;">88KB</span>
+     <span style="width: 100px;"> + </span>
+     <span style="width: 160px;"> 4KB </span>
+     <span style="width: 100px;"> &lt; </span>
+     <span style="width: 160px;"> 551KB</span>
+     </p>
+     <pre contenteditable>div {
+  background-image:url(images/frame.jpg);
+  -webkit-mask: url(images/framemask.png); 
+}</pre>
+     <footer><a href="mask/index.html" target="play">Masking Example</a> - <a href="mask/mask.zip">Download the Code Lab</a></footer>
+     </section>
+    </div>  
+  
+   
+<!-- CSS3 Options -->
+<div class="slide normal">
+     <header>
+      <h1>Is CSS3 the Solution?</h1>
+     </header> 
+     <section>
+     <div style="float: left; width: 50%">
+     <h2>Properties</h2> 
+     <ul class="big">
+        <li>rounded Corners</li>
+        <li>box-shadow</li>
+        <li>text-shadow</li>
+        <li>background-position</li>
+        <li>background-repeat</li>
+        <li>multiple background images</li>
+        <li>border-image</li>
+     	<li>gradients</li>
+     </ul>
+     </div>
+     <div style="float: left; width: 50%">
+     <h2>Benefits</h2>
+     <ul class="big">
+        <li>Fewer HTTP Requests</li>
+        <li>Updatable</li>
+        <li>Scalable</li>
+        <li>Transitionable</li>
+        <li>Animatable</li>
+        <li>Fewer DOM Nodes</li>
+     </ul>
+     </div>
+     </section>
+    </div>
+   
+<!-- List of CSS properties that risk slowing you down -->
+<div class="slide normal" style="background-image:url(images/bugsbunny.jpg); background-size:cover">
+     <header>
+      <h1>CSS3 <span style="-webkit-text-stroke: #fff 1px;">ISN'T</span> always the Solution!</h1>
+      <h2 style="font-size: 40px">UI Features can ruin your web app</h2>
+     </header> 
+     <section>
+     <ul class="big whitened" >
+     	<li>Enlarged Fonts</li> 
+     	<li>Box Shadow (inset)</li> 
+     	<li>Text Indent</li>
+     	<li>Gradients</li>
+        <li>background-size: cover</li> 
+        <li>&lsquo;Non-rendered&rsquo; content</li>
+        <li>Recalculating / Repainting the UI</li>
+        </ul> <p style="font-weight:700; clear:both; ">Static images may render faster than CSS effects</p>
+    
+<footer class="credit">Disney: "The Tortoise and The Hare"</footer>
+     </section>
+    </div>
+    
+    
+ 
+<!-- Shadows -->
+<div class="slide normal" style="background-image: url(images/insetshadow.jpg); background-size: 70%; background-position:50% 87%">
+     <header>
+      <h1>Shadows</h1>
+     </header> 
+     <section>
+     <ul class="big">
+    <li>Not rendered as static bitmap</li>
+    <li>Evaluated  each repaint</li>
+     </ul>
+     <footer>Render order: rendered from back to front</footer>
+     </section> 
+    </div>
+    
+
+          
+    
+    
+        
+<!-- Gradients -->
+<div class="slide normal" id="largegradient">
+     <header>
+      <h1>Large Gradients</h1>
+     </header> 
+     <section>
+     <ul class="big" style="width: 550px"><img src="images/iphonered.png" alt="iphone with large gradient" style="position: absolute; top: 70px; left: 586px"/>
+     	<li>Keep gradients small</li>
+        <li>Requires CPU to create</li>
+        <li>Stored in memory</li>
+        <li>Memory: Radial >  Linear </li>
+        <li>Render Speed: <br>
+Images often faster than Gradients</li>
+     </ul>
+     
+     </section>
+    </div>
+    
+    
+<!-- 3D Transforms -->
+<div class="slide normal" style="background-image:url(images/panacea.png); background-position: 50% 65%;">
+     <header>
+      <h1>Hardware Acceleration: 3d Transforms</h1>
+     </header> 
+     <section>
+<pre contenteditable> div {
+	transform: translateZ(0);
+ }</pre>
+     
+     <h1>translateZ(0)</h1>
+     <p style="margin-top: 260px;" class="big">Composited mage in memory == <code style="font-weight:bold">H x W x 4</code></p>
+     <p>Take advantage of hardware acceleration, but don't abuse it. GPU accelerated elements eat video <strong>memory</strong></p>
+     </section>
+    </div>
+       
+   
+    
+
+<div class="slide normal"> 
+     <header><h1>Images</h1></header> 
+     <section class="content"> 
+     <h2>Use background images, instead of foreground images.</h2>
+     <p>Background images are first rendered with image data send to Core Animation. Safari doesn't render &lt;img&gt; first. The decoded image file is sent, as is, pre-rendered, to the Core Animation as a new layer. Foreground images is sent to Core Animation as image data which it has to keep in graphics memory. This uses more memory.</p> 
+     </section>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Header - UI Responsiveness -->
+<div class="slide normal" style="background-image: url(images/clock.jpg); background-size:cover;">
+<header>
+<h1>Responsive UI</h1>
+</header> 
+<section>
+<footer class="credit">Photo: <a href="http://iblogo.com">iblogo.com</a></footer> 
+</section>
+</div>
+
+<!-- touch events -->
+<div class="slide normal" style="background-image:url(images/gestures.gif); background-size:80%; background-position: 50% 90%" onClick="this.querySelector('section ul').style.visibility ='visible';">
+<header>
+<h1>Touch Events</h1>
+</header> 
+<section> 
+<ul  class="big temphidden" style="text-shadow: 2px 2px 2px rgba(0,0,0,0.4);  margin-top: 150px; background-color:rgba(255,240,230,0.8);" > 
+    <li>Touch Event: 300ms delay</li>
+    <li>Extra touches aren't forgotten</li>
+    <li>co-opt with touch events with JS</li>
+</ul>
+<footer class="credit">Credit: <a href="http://www.lukew.com/touch/TouchGestureGuide.pdf">Luke W.</a></footer>
+</section>
+</div>
+    
+<!-- Steps for responsive UI -->
+<div class="slide normal" style="background-image:url(images/touch.gif) , url(images/thumbup.jpg) , url(images/butler.jpg); background-position: 5% bottom, 45% 95%, 95% 98%">
+<header>
+<h1>Responsive UI</h1>
+</header> 
+<section> 
+
+<ol class="big">
+<li>Accept input</li>
+<li>Provide user feedback</li>
+<li>Update the UI</li>
+</ol>
+</section>
+</div>
+
+
+<!-- Repaint -->
+<div class="slide normal" style="background-image:url(images/paintbrush.jpg); background-size:cover;">
+     <header>
+      <h1 style="color:#fff">Repaint</h1>
+     </header> 
+     <section style="margin:120px 40px 0 30px;" class="whitened"> 
+     <p>When visual changes do NOT require recalculation of layout</p>
+     <ul class="big">
+     	<li>Visibility</li>
+        <li>Colors</li>
+        <li>Transforms</li>
+        <li>Background images</li>
+        <li>Transparency</li>
+     </ul>
+     <footer class="credit">Photo: <a href="http://www.flickr.com/photos/chanbliss/3334163612/">Chanbliss</a></footer>
+     </section>
+    </div>
+    
+        
+<!-- Reflorw -->
+<div class="slide normal" style="background-image:url(images/stream.jpg); background-size: cover;">
+    <header>
+        <h1 style="color:#fff">Reflow</h1>
+    </header> 
+    <section style="margin:0px 40px 0 30px;" class="whitened"> 
+        <p>When visual changes REQUIRE recalculation of layout</p>
+        <ul class="big">
+        	<li>Page load, Layout &amp; orientation change</li>
+            <li>DOM Changes: Adding, removing, updating nodes</li>
+            <li>JS style information request</li>
+		   	<li>Changing value of display property</li>
+		   	<li>Changing to CSS property alters box model value</li>
+         	<li style="line-height:1">Resizing, zooming and scrolling (desktop), but not necessarily on mobile devices (viewport)</li>
+         	
+        </ul>
+        <ul class="notes">
+        <li>The larger a DOM tree, the more expensive a reflow is</li>
+        <li>Opera lists repaint and reflow as one of the 3 main contributors to sluggishness</li>
+        <li>Reflow of an element causes the subsequent reflow of all child and ancestor elements as well as any elements following it in the DOM.</li></ul>
+        <footer class="credit">Photo: <a href="http://www.alaskaadventures.com">Alaska Adventures</a></footer>
+    </section>
+</div>
+
+
+
+<!-- minimize DOM -->
+<div class="slide normal">
+    <header>
+    	<h1>Minimize the DOM</h1>
+    </header> 
+    <section> 
+        <ul class="big">
+            <li>Minimize number of nodes
+            	<ul class="temphidden">
+                	<li>Uses up memory</li>
+                    <li>Measures each node for each repaint</li>
+                </ul></li>
+            <li>Cache DOM lookups
+            <ul class="temphidden">
+                	<li>Store them!</li>
+                </ul>
+            </li> 
+            <li>Minimize DOM manipulations
+            	<ul class="temphidden">
+                	<li>Batch DOM queries &amp; DOM manipulations separately </li>
+                </ul>
+            </li>
+        </ul>
+         <p class="notes" style="margin-top:50px">More nodes = more expensive! </p>
+        
+    </section>
+</div>
+      
+      
+<!-- reuse DOM -->
+<div class="slide normal" style="background-image:url(images/trashcan.jpg); background-position: 5% 95%;">
+    <header>
+    	<h1>Reuse the DOM</h1>
+    </header> 
+    <section> 
+        <p style="font-size: 40px; margin:20px"><strong>Pool</strong> Elements and Objects</p>
+        <p style="font-size: 40px; margin:20px"><strong>Reuse</strong> instead of Allocate and Destroy</p>
+        <img src="images/tetris.gif" alt="tetris" style="float:right;"/>
+        <ol class="big">
+        	<li style="line-height:1.3">Create a pool of DOM elements (more than you need)</li>
+            <li>Use the nodes you created</li>
+            <li>Release back into pool</li>
+            <li>Go to step 2</li>
+        </ol>
+    </section>
+</div>
+   
+
+   
+
+
+
+
+<div class="slide intro"  style="background-image:url(images/bandaid.png), url(images/broken-lcd.jpg); background-size: 300px, cover; background-position: 75% 27%,top right"> 
+     <header><h1 style="font-size: 250%">Other Tips</h1></header> 
+     <section class="content"> 
+     <footer class="credit">Photo: <a href="http://www.hdwallpapers4ipad.com/photo/abstract_backgrounds/broken_screen/2-0-1568">hdwallpapers4ipad.com</a></footer>
+     </section>
+ </div>
+
+<!-- Testing -->
+<div class="slide normal">
+    <header>
+    	<h1>Test in Real Environments</h1>
+    </header> 
+    <section> 
+    <img src="images/openapps.jpg" style="margin-right: 20px; float:right;" alt="iPhone showing which apps are running in the background"/>
+        <ul class="big">
+          <li>Test on Phone: 
+          		<ul>
+                    <li>Simulator != Emulator</li>
+                    <li>Cap your memory</li>
+                </ul>
+                </li>
+          <li>Test with many apps open</li>
+          <li>Test on multiple devices</li>
+          <li>Test on mobile network</li>
+        </ul>
+      </section>
+</div>      
+    
+  
+
+   
+<!-- Tricks -->
+<div class="slide normal" style="background-image:url(images/nerdGirl.jpg); background-position: 5% bottom;">
+<header>
+<h1>Tricks</h1>
+</header> 
+<section> 
+  <ul class="big">
+    <li>Use tools
+    	<ul><li>Even basic ones, like Activity Monitor</li></ul></li>
+    <li>Scale down (not up)</li>
+    <li>Use average size fonts</li>
+    <li>Take advantage of HTML5 &amp; native storage</li>
+    <li>Don't disable zoom (except for games)</li>
+  </ul>
+  
+  <footer>Credit: <a href="http://nerdquirks.tumblr.com/">NerdQuirks</a></footer>
+</section>
+</div>  
+    
+<!-- Take Aways -->
+<div class="slide normal" style="background-image:url(images/speed.jpg); background-size:cover;">
+     <header>
+      <h1>Conclusion</h1>
+     </header> 
+     <section> 
+       <ul class="big whitened" style="margin-top: 20px; float:none;">
+         <li>Follow performance recommendations</li>
+         <li>Minimize Latency</li>
+         <li>Manage memory</li>
+         <li>Use CSS Judiciously</li>
+         <li>Use JS Minimally (and NOT for animation)</li>
+        <li>Batch query and manipulations separately</li>
+        <li>Reuse the DOM</li>
+         <li>Keep Mobile in Mind</li>
+       </ul>
+       <footer>Photo Credit: <a href="http://www.nasa.gov/mission_pages/shuttle/shuttlemissions/sts125/multimedia/gallery/09-05-11-9.html">NASA.gov</a></footer>
+     </section>
+    </div>
+   
+   
+<!-- It's a phone -->
+<div class="slide normal">
+     <header>
+      <h1>Remember...</h1>
+     </header> 
+      
+       <section>
+          <h1 style="font-size: 60px; letter-spacing:0px" class="temphidden">Your users may not be tethered</h1> 
+          <h1 style="font-size: 60px; letter-spacing:0px" class="temphidden">and their memory may be very limited.</h1>
+	   </section>
+    </div> 
+    
+      
+
+
+
+
+
+
+<div class="slide"> 
+   <h1 class="intro">Thank you</h1>
+   <div class="books">
+       <img src="http://akamaicovers.oreilly.com/images/9780980846904/cat.gif" alt="HTML5 and CSS3 for the Real World">
+       <img src="http://akamaicovers.oreilly.com/images/0636920018063/cat.gif" alt="HTML5: The Definitive Guide"/>
+       <img src="http://akamaicovers.oreilly.com/images/0636920021711/cat.gif" alt="MObile HTML5"/>
+       <img src="http://akamaicovers.oreilly.com/images/0636920025955/cat.gif" alt="Web Performance Daybook"/>
+    </div>
+       <br style="clear:both;">Slides: <a href="http://estelle.github.com/mobileperf">estelle.github.com/mobileperf</a>
+       <br/>Name: Estelle Weyl
+       <br>Blog: <a href="http://standardista.com">standardista.com</a>
+       <br>Twitter: <a href="http://twitter.com/estellevw">@estellevw</a></p>
+    </div> 
+</div>
+
+
+
+</div>
+<script>
+(function() {
+	var doc = document,
+	    disableBuilds = true,
+		ctr = 0,
+		spaces = /\s+/,
+		a1 = [''],
+	    toArray = function(list) {
+  		return Array.prototype.slice.call(list || [], 0);
+	},
+		byId = function(id) {
+		if (typeof id == 'string') { return doc.getElementById(id); }
+		return id;
+	},
+	
+	query = function(query, root) {
+	  if (!query) { return []; }
+		if (typeof query != 'string') { return toArray(query); }
+		if (typeof root == 'string') {
+		  root = byId(root);
+		  if(!root){ return []; }
+    	}
+        root = root || document;
+  		var rootIsDoc = (root.nodeType == 9);
+  		var doc = rootIsDoc ? root : (root.ownerDocument || document);
+
+		// rewrite the query to be ID rooted
+		if (!rootIsDoc || ('>~+'.indexOf(query.charAt(0)) >= 0)) {
+			root.id = root.id || ('qUnique' + (ctr++));
+			query = '#' + root.id + ' ' + query;
+		}
+	
+		// don't choke on something like ".yada.yada >"
+		if ('>~+'.indexOf(query.slice(-1)) >= 0) { query += ' *'; }
+		return toArray(doc.querySelectorAll(query));
+	},
+	
+	strToArray = function(s) {
+		if (typeof s == 'string' || s instanceof String) {
+			if (s.indexOf(' ') < 0) {
+				a1[0] = s;
+				return a1;
+			} 
+			else {
+					return s.split(spaces);
+			}
+		}
+		return s;
+	  },
+
+    addClass = function(node, classStr) {
+	  classStr = strToArray(classStr);
+	  var cls = ' ' + node.className + ' ';
+	  for (var i = 0, len = classStr.length, c; i < len; ++i) {
+		c = classStr[i];
+		if (c && cls.indexOf(' ' + c + ' ') < 0) {
+		  cls += c + ' ';
+		}
+	  }
+	  node.className = cls.trim();
+	}, 
+	
+	removeClass = function(node, classStr) {
+		  var cls;
+		  if (classStr !== undefined) {
+			classStr = strToArray(classStr);
+			cls = ' ' + node.className + ' ';
+			for (var i = 0, len = classStr.length; i < len; ++i) {
+			  cls = cls.replace(' ' + classStr[i] + ' ', ' ');
+			}
+			  cls = cls.trim();
+		  } else {
+			cls = '';
+		  }
+		
+		  if (node.className != cls) {
+			node.className = cls;
+		  }
+		
+	  },
+	
+	  toggleClass = function(node, classStr) {
+		  var cls = ' ' + node.className + ' ';
+		  if (cls.indexOf(' ' + classStr.trim() + ' ') >= 0) {
+			removeClass(node, classStr);
+		  } else {
+			addClass(node, classStr);
+		  }
+	  },
+
+
+
+  		ua = navigator.userAgent,
+		isFF = parseFloat(ua.split('Firefox/')[1]) || undefined,
+		isWK = parseFloat(ua.split('WebKit/')[1]) || undefined,
+		isOpera = parseFloat(ua.split('Opera/')[1]) || undefined,
+
+
+
+  	 	canTransition = (function() {
+		  var ver = parseFloat(ua.split('Version/')[1]) || undefined;
+		  // test to determine if this browser can handle CSS transitions.
+		  var cachedCanTransition = 
+		
+			(isWK || (isFF && isFF > 3.6 ) || (isOpera && ver >= 10.5));
+		  return function() { return cachedCanTransition; }
+
+  		}
+  )();
+
+
+//-----------------------------------------------------------------//
+
+var Slide = function(node, idx) {
+  this._node = node;
+  if (idx >= 0) {
+    this._count = idx + 1;
+  }
+  if (this._node) {
+    addClass(this._node, 'slide distant-slide');
+  }
+  this._makeCounter();
+  this._makeBuildList();
+};
+
+
+
+Slide.prototype = {
+    _node: null,
+    _count: 0,
+    _buildList: [],
+    _visited: false,
+    _currentState: '',
+    _states: [ 'distant-slide', 'far-past',
+               'past', 'current', 'future',
+               'far-future', 'distant-slide' ],
+    setState: function(state) {
+    if (typeof state != 'string') {
+      state = this._states[state];
+    }
+
+    if (state == 'current' && !this._visited) {
+      this._visited = true;
+      this._makeBuildList();
+    }
+
+    removeClass(this._node, this._states);
+    addClass(this._node, state);
+    this._currentState = state;
+
+
+
+  var _t = this;
+    setTimeout(function(){ _t._runAutos(); } , 400);
+  },
+
+    _makeCounter: function() {
+    if(!this._count || !this._node) { return; }
+
+      var c = doc.createElement('span');
+    c.innerHTML = this._count;
+    c.className = 'counter';
+    this._node.appendChild(c);
+  },
+
+    _makeBuildList: function() {
+    this._buildList = [];
+    if (disableBuilds) { return; }
+
+      if (this._node) {
+      this._buildList = query('[data-build] > *', this._node);
+    }
+
+      this._buildList.forEach(function(el) {
+      addClass(el, 'to-build');
+    });
+  },
+
+    _runAutos: function() {
+    if (this._currentState != 'current') {
+      return;
+    }
+
+      // find the next auto, slice it out of the list, and run it
+
+      var idx = -1;
+    this._buildList.some(function(n, i) {
+      if (n.hasAttribute('data-auto')) {
+        idx = i;
+        return true;
+      }
+
+        return false;
+    });
+    if (idx >= 0) {
+      var elem = this._buildList.splice(idx, 1)[0];
+      var transitionEnd = isWK ? 'webkitTransitionEnd' : (isFF ? 'mozTransitionEnd' : 'oTransitionEnd');
+      var _t = this;
+      if (canTransition()) {
+        var l = function(evt) {
+          elem.parentNode.removeEventListener(transitionEnd, l, false);
+          _t._runAutos();
+        };
+        elem.parentNode.addEventListener(transitionEnd, l, false);
+        removeClass(elem, 'to-build');
+      } else {
+        setTimeout(function() {
+          removeClass(elem, 'to-build');
+          _t._runAutos();
+        }, 400);
+      }
+
+      }
+
+    },
+
+    buildNext: function() {
+    if (!this._buildList.length) {
+      return false;
+    }
+
+      removeClass(this._buildList.shift(), 'to-build');
+    return true;
+  },
+
+  };
+
+
+
+  //
+  // SlideShow class
+  //
+
+  var SlideShow = function(slides) {
+  this._slides = (slides || []).map(function(el, idx) {
+    return new Slide(el, idx);
+  });
+
+
+
+  var h = window.location.hash;
+  try {
+    this.current = parseInt(h.split('#slide')[1], 10);
+  } catch (e) { /* squeltch */ }
+
+  this.current = isNaN(this.current) ? 1 : this.current;
+  var _t = this;
+  doc.addEventListener('keydown', function(e) { _t.handleKeys(e); }, false);
+  doc.addEventListener('mousewheel', function(e) { _t.handleWheel(e); }, false);
+  doc.addEventListener('DOMMouseScroll', function(e) { _t.handleWheel(e); }, false);
+  doc.addEventListener('touchstart',  function(e) { _t.handleTouchStart(e); }, false);
+  doc.addEventListener('touchend', function(e) { _t.handleTouchEnd(e); }, false);
+  window.addEventListener('popstate', function(e) { _t.go(e.state); }, false);
+  doc.getElementById('back').addEventListener('click', function(e) {_t.prev();}, false);
+  doc.getElementById('next').addEventListener('click', function(e) {_t.next();}, false);
+  var visibilityItems = doc.querySelectorAll('ul.visibility li');
+	
+	for (var i = 0; i < visibilityItems.length; i++) {
+    	var element = visibilityItems.item(i); // you must use the item() method. Sorry!
+	
+		element.addEventListener('click', 
+			function(e) {this.classList.toggle('visible');}, false);
+	}
+	
+  this._update();
+};
+
+
+
+SlideShow.prototype = {
+  _slides: [],
+
+    _update: function(dontPush) {
+		document.querySelector('#presentation-counter').innerText = this.current;
+		if (history.pushState) {
+		  if (!dontPush) {
+			history.pushState(this.current, 'Slide ' + this.current, '#slide' + this.current);
+		    }
+		} else {
+		  window.location.hash = 'flopslide' + this.current;
+		}
+	    for (var x = this.current-1; x < this.current + 7; x++) {
+		    if (this._slides[x-4]) {
+				this._slides[x-4].setState(Math.max(0, x-this.current));
+		    }
+		  }
+    },
+
+    current: 0,
+
+    next: function() {
+		if(document.querySelector('.current .temphidden')){
+			this.removeHidingClass();
+			return;	
+		}
+		if (!this._slides[this.current-1].buildNext()) {
+		  this.current = Math.min(this.current + 1, this._slides.length);
+		  this._update();
+		}
+	 },
+	prev: function() {
+	this.current = Math.max(this.current-1, 1);
+	this._update();
+  },
+
+   go: function(num) {
+	  if (!num) return;
+	  if (history.pushState && this.current != num) {
+	    history.replaceState(this.current, 'Slide ' + this.current, '#slide' + this.current);
+	  }
+	  this.current = num;
+	  this._update(true);
+    },
+
+
+
+  _notesOn: false,
+	
+ showNotes: function() {
+    var isOn = this._notesOn = !this._notesOn;
+    query('.notes').forEach(function(el) {
+      el.style.display = (isOn) ? '' : 'none';
+    });
+  },
+
+
+    handleWheel: function(e) {
+    var delta = 0;
+    if (e.wheelDelta) {
+      delta = e.wheelDelta/120;
+      if (isOpera) {
+			delta = -delta;
+		  }
+      } 
+	  else if (e.detail) {
+        delta = -e.detail/3;
+      }
+
+      if (delta > 0 ) {
+		  this.prev();
+		  return;
+		}
+      if (delta < 0 ) {
+		  this.next();
+		  return;
+		}
+    },
+	
+	addNotes: function(){
+		if(document.querySelector('.current textarea.mynotes')) {
+			document.querySelector('.current textarea.mynotes').classList.toggle('temphidden');
+			return;
+		}
+		var ta = document.createElement('textarea'),
+		     currentSlide = document.querySelector('.current section'),
+			 path = window.location.pathname,
+			 A = path.lastIndexOf('/') + 1, 
+			 B = path.lastIndexOf('.'),
+			 firstPartOfKey, key;
+		if(B && B > A){	 
+		    firstPartOfKey = path.substring(A, B);
+		} else {
+		    firstPartOfKey = path.substring(1, path.length-1) || 'home';	
+		}
+		//console.log(firstPartOfKey);
+		key = firstPartOfKey +  window.location.hash;
+		ta.value = window.localStorage.getItem(key) || '';
+		ta.className = 'mynotes';
+		
+		ta.addEventListener('keyup', function(){
+			//console.log(key + ' ' + ta.value)
+		    window.localStorage.setItem(key,ta.value);
+		});
+		currentSlide.appendChild(ta);
+	},
+	
+	
+	removeHidingClass: function(){
+		var paragraphToShow = document.querySelector('.current .temphidden');
+		if(paragraphToShow) {paragraphToShow.classList.remove('temphidden');}
+	
+	},
+	
+    handleKeys: function(e) {
+      // disable keys for these elements
+      if (/^(input|textarea|pre|object)$/i.test(e.target.nodeName)) return;
+	 
+
+      switch (e.keyCode) {
+		  case 37: // left arrow
+		  case 33: // left clicker
+			 this.prev(); break;
+		  case 39: // right arrow
+		  case 32: // space
+		  case 34: // clicker right
+			 this.next(); break;
+		  case 50: // 2
+		  case 190: // 2
+			 this.showNotes(); 
+			 this.removeHidingClass(); 
+			 break;
+	      case 52: // 4 (for taking notes with local storage (students)
+		     this.addNotes(); break;
+		     break;
+    	}
+    },
+	
+    _touchStartX: 0,
+    handleTouchStart: function(e) {
+    this._touchStartX = e.touches[0].pageX;
+  },
+
+    handleTouchEnd: function(e) {
+    var delta = this._touchStartX - e.changedTouches[0].pageX;
+    var SWIPE_SIZE = 150;
+    if (delta > SWIPE_SIZE) {
+      this.next();
+    } else if (delta< -SWIPE_SIZE) {
+       this.prev();
+     }
+    },
+  };
+
+  // Initialize
+  var slideshow = new SlideShow(query('.slide'));
+})();
+
+
+
+  </script>
+  <script src="prefixfree.js"></script>
+  <!--[if lt IE 9]>
+  <script 
+
+  src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({ mode: "overlay" });</script>
+  <![endif]--> 
+
+  </body> 
+
+</html>
+

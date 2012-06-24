@@ -1,0 +1,116 @@
+div, header, footer, nav, body, li, p, ul, ol, h1 {
+  margin:0;
+  padding:0;
+  background-repeat:no-repeat
+}                  
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section { 
+    display:block;
+}
+article {background-color: #fff; margin: auto;}
+nav ul { list-style:none; }
+
+blockquote, q { quotes:none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content:''; content:none; }
+
+a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; }
+
+ins { background-color:#ff9; color:#000; text-decoration:none; }
+
+mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom:1px dotted; cursor:help; }
+
+input, select { vertical-align:middle; }
+/* END RESET CSS */
+
+/* OUR CSS */
+body{
+	background-image: -webkit-linear-gradient(rgba(48,48,238,0.9),rgba(48,48,238,0.1)); 
+}
+
+h1{
+	padding:5px 0px;
+	font:2em sans-serif;
+	font-weight:bold;
+	text-align:center;
+}
+
+article header h1, aside h1, h2{
+	padding: 0px;
+	font:1.5em sans-serif;
+	font-weight:bold;
+}
+
+hgroup h2{
+	font:1.3em sans-serif;
+	text-align: center;
+}
+
+time {
+	margin: 5px 0px 0px 0px;
+	float:right;
+}
+
+header{
+	background-color:rgba(200,200,202,0.5);
+	text-align:center;
+}
+
+article header{
+	border-bottom:1px solid rgb(200,200,202);
+	text-align:left;
+}
+
+nav{
+	background-color:rgb(200,200,202);
+	height:40px;
+	margin:0px 0px 10px 0px;
+	text-align:center;
+}
+a {font-family:Arial, Helvetica, sans-serif;}
+nav ul{
+	padding:10px 0px;
+}
+
+nav ul li{
+	display:inline;
+	margin:0px 5px;
+}
+
+aside{
+	width:190px;
+	float:left;
+	padding:0px 5px;
+	text-align:justify;
+}
+
+section{
+	margin:0px 5px 0px 5px;
+	float:right;
+	width:575px;
+}
+
+body > article{
+	border:1px solid #FFF;
+	margin:15px auto;
+	width: 800px;
+}
+
+footer{
+	background-color:rgba(200,200,202,0.5);
+	text-align:center;
+	width:100%;
+	clear:both;
+	height:30px;
+}
+#input {border-bottom: 1px solid #ccc; padding-bottom: 20px;}
+#output li {border-top: 1px solid #ccc; padding-top: 5px; margin-top: 5px;}
+#output span{ min-width: 120px; float: left; clear: both;
+		
+}
