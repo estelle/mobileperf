@@ -4,7 +4,7 @@
     <!--[if gte IE 9]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]--> 
     <!--[if lt IE 9]><meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" /><![endif]--> 
 <meta charset="utf-8" />
-    <title>Breaking the Mobile Web</title>
+    <title>Mobile Web Performance</title>
 <!--
 Made by: Estelle Weyl
 Copyright:  CC-SA-NC-BY - Creative Commons Attribution-NonCommercial-ShareAlike 
@@ -506,6 +506,11 @@ section td, section th {
 		background-image:url(images/hugegradient.jpg);
 		background-position: -125px -26px;	
 	}
+#fonts img  {
+		display: block;
+		margin: 30px auto;
+		width: 700px;
+	}
 @media print {
 	.slide {
 		page-break-inside: avoid;
@@ -553,7 +558,7 @@ section td, section th {
    <div id="presentation-counter"></div>
    <div id="slides">
     <div class="slide"> 
-   <h1 class="intro">Breaking the Mobile Web</h1>
+   <h1 class="intro">Mobile Web Performance</h1>
    <div class="books">
        <img src="http://akamaicovers.oreilly.com/images/9780980846904/cat.gif" alt="HTML5 and CSS3 for the Real World">
        <img src="http://akamaicovers.oreilly.com/images/0636920018063/cat.gif" alt="HTML5: The Definitive Guide"/>
@@ -576,7 +581,7 @@ section td, section th {
         <p>Press <span class="key">&larr;</span>  to go back</p>
         <p>Or navigation with buttons or browser history</p>
         <p>Files will be at <a href="http://estelle.github.com/mobileperf">estelle.github.com/mobileperf</a></p>
-    </section>
+      <img src="images/top-smartphones.jpg" width="650" height="283" alt="phones" style="margin: 50px auto 0 auto; display:block;"> </section>
 </div> 
  
   
@@ -616,6 +621,7 @@ section td, section th {
    
  <div class="slide intro"> 
      <header><h1 class="em" style="font-size: 7rem; margin:150px auto">TL;DR;</h1></header> 
+     <section></section>
      
  </div>  
       
@@ -1396,7 +1402,21 @@ Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
      </section>
     </div>
     
-    
+<!-- Tall fonts -->
+<div class="slide normal">
+     <header>
+      <h1>Fonts</h1>
+     </header> 
+     <section id="fonts">  
+       <img src="images/tallfont_02.gif" alt="Fonts with Tall Ascenders">
+       <img src="images/tallfont_03.gif" alt="Fonts with Tall Ascenders">
+       <img src="images/tallfont_04.gif"  alt="Fonts with Tall Ascenders"> 
+       <img src="images/tallfont_05.gif"  alt="Fonts with Tall Ascenders">
+       <footer class="notes">Fonts: Zapfino, Helvetica, Savoye<br>
+		Amount of space painted is large!</footer>
+         
+       </section>
+    </div>    
  
 <!-- Shadows -->
 <div class="slide normal" style="background-image: url(images/insetshadow.jpg); background-size: 70%; background-position:50% 87%">
@@ -1414,7 +1434,23 @@ Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
     
 
           
-    
+<!-- Text-indent -->
+<div class="slide normal" style="background-image:url(images/medium_phone.jpg); background-position: 600px 100px;">
+     <header>
+      <h1>Text-indent</h1>
+     </header> 
+     <section>
+     <div style="position:absolute; left: 40px; top: 240px; padding:5px;">MyLogo Text</div>
+     <div style="position:absolute; left: 660px; top: 240px; border-radius:50%; background-color:#F39; color:#fff; padding:5px;">Logo</div>
+     <div style="position:absolute; left: 40px; top: 230px; width: 740px; height:80px; border: 2px dashed #ccc;"></div>
+     
+     <ul class="sevenless" style="margin-top:300px">
+     	<li>Use CSS Clip</li>
+        <li>Position text up instead of left</li>
+        
+     </ul>
+     </section> 
+    </div>      
     
         
 <!-- Gradients -->
