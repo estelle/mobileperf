@@ -60,16 +60,24 @@ body {
 	display: block;
 	overflow: hidden;
 	font-family: Helvetica, Arial, sans-serif;
-	background-color: #C5CCD4;
-	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.70, #C5CCD4), color-stop(0.3, #CBD2D8));
-	background: -webkit-linear-gradient(0, #C5CCD4 0%, #C5CCD4 2px, #CBD2D8 2px, #CBD2D8 100%);
-	background: -moz-linear-gradient(0, #C5CCD4 0%, #C5CCD4 2px, #CBD2D8 2px, #CBD2D8 100%);
-	background: -ms-linear-gradient(0, #C5CCD4 0%, #C5CCD4 2px, #CBD2D8 2px, #CBD2D8 100%);
-	background: -o-linear-gradient(0, #C5CCD4 0%, #C5CCD4 2px, #CBD2D8 2px, #CBD2D8 100%);
-	background: linear-gradient(0, #C5CCD4 0%, #C5CCD4 2px, #CBD2D8 2px, #CBD2D8 100%);
+	background-color: rgba(255,255,255,0);
+	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.70, rgba(255,255,255,0)), color-stop(0.3, rgba(255,255,255,0.5)));
+	background: -webkit-linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 5px, rgba(255,255,255,0.5) 5px, rgba(255,255,255,0.5) 100%);
+	background: -moz-linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 5px, rgba(255,255,255,0.5) 5px, rgba(255,255,255,0.5) 100%);
+	background: -ms-linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 5px, rgba(255,255,255,0.5) 5px, rgba(255,255,255,0.5) 100%);
+	background: -o-linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 5px, rgba(255,255,255,0.5) 5px, rgba(255,255,255,0.5) 100%);
+	background: linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 5px, rgba(255,255,255,0.5) 5px, rgba(255,255,255,0.5) 100%);
 	-moz-background-size: 7px 7px;
 	background-size: 7px 7px;
 	background-repeat: repeat;
+	background-color: #C5CCD4;
+	transition: 1s;
+}
+@media screen and (orientation: portrait){
+#presentation {background-color:red;}		
+}
+@media screen and (max-width: 500px){
+#presentation {background-color:green;}		
 }
 body > header, body > footer {
 	width: 100%;
@@ -511,6 +519,14 @@ section td, section th {
 		margin: 30px auto;
 		width: 700px;
 	}
+ #bcksizeexample2 {
+	float: right;
+	box-shadow: inset 5px 5px 5px rgba(0,0,0,0.4),inset -5px -5px 5px rgba(0,0,0,0.4) ;
+	width: 150px;
+	height:250px;
+	background-position: 50%;
+  background-image: url(http://placekitten.com/g/200/200/);	
+}
 @media print {
 	.slide {
 		page-break-inside: avoid;
@@ -1470,7 +1486,26 @@ Images often faster than Gradients</li>
      
      </section>
     </div>
-    
+   
+   
+<!-- Background-size -->
+  <!--background-size -->
+<div class="slide" id="bgsize">
+	<header><h1>background-size</h1></header>
+    <section class="content">
+    <pre contenteditable><b><u></u>background-size</b>: <span onClick="changeBackSide2('auto')">auto</span> | <span onClick="changeBackSide2('contain')">contain</span> | <span onClick="changeBackSide2('cover')">cover</span> | <span onClick="changeBackSide2('150px 250px')">150px 250px</span></pre>
+    <div id="bcksizeexample2" class="bgimage2">
+    </div>
+    </section>
+    <script defer>
+    function changeBackSide2(backsize) {
+			 console.log('hit');
+			  var image = document.getElementById('bcksizeexample2');
+              image.style.backgroundSize = backsize;
+			  
+            }
+	</script>
+</div>  
     
 <!-- 3D Transforms -->
 <div class="slide normal" style="background-image:url(images/panacea.png); background-position: 50% 65%;">
