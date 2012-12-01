@@ -292,7 +292,7 @@ a:hover {
 }
 pre {
 	text-align: left;
-	font-size: 1.1rem;
+	font-size: 1.4rem;
 	padding: 10px 20px;
 	background: rgba(218,218,220, 0.5);
 	-moz-border-radius: 8px;
@@ -527,6 +527,7 @@ section td, section th {
 	background-position: 50%;
   background-image: url(http://placekitten.com/g/200/200/);	
 }
+#four {cursor:move;}
 @media print {
 	.slide {
 		page-break-inside: avoid;
@@ -567,7 +568,7 @@ section td, section th {
 <div id="topinfo"></div>
 <!-- footer instructions -->  
 <div id="info">
-    <p><a href="http://standardista.com">Estelle Weyl</a> | <a href="http://twitter.com/estellevw">@estellevw</a> | <a href="http://github.com/estelle">Github</a> | Press <span class="key">&rarr;</span> to advance, <span class="key">2</span> for comments, <span class="key">4</span> to read/write notes.</p>
+    <p><a href="http://standardista.com">Estelle Weyl</a> | <a href="http://twitter.com/estellevw">@estellevw</a> | <a href="http://github.com/estelle">Github</a> | Press <span class="key">&rarr;</span> to advance, <span class="key">2</span> for comments, <span class="key" id="four">4</span> to read/write notes.</p>
 </div>
 
   <div id="presentation">
@@ -887,13 +888,13 @@ development, but increases the energy used by the resulting pages</li></ul></li>
 </div>
 
 
-
+<!-- STEVE SOUDERS
 <div class="slide object">
      <object data="http://stevesouders.com/mobileperf/"></object>
      <header><h1>Mobile Performance Bookmarklet</h1></header>
      <a href="http://stevesouders.com/mobileperf/mobileperfbkm.php" class="objectlink">SteveSounders</a> 
  </div>
-      
+ -->     
  
  
 <div class="slide">
@@ -1359,10 +1360,14 @@ Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
   background-image:url(images/frame.jpg);
   -webkit-mask: url(images/framemask.png); 
 }</pre>
-     <footer><a href="mask/index.html" target="play">Masking Example</a> - <a href="mask/mask.zip">Download the Code Lab</a></footer>
      </section>
     </div>  
-  
+ 
+ <div class="slide object"> 
+<object data="mask/index.html"></object>
+     <header><h1>Masking example</h1></header> 
+     <a href="mask/mask.zip" class="objectlink" target="_foo">Download Zip</a>
+ </div>    
    
 <!-- CSS3 Options -->
 <div class="slide normal">
@@ -1410,7 +1415,8 @@ Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
      	<li>Box Shadow (inset)</li> 
      	<li>Text Indent</li>
      	<li>Gradients</li>
-        <li>background-size: cover</li> 
+        <li>background-size: cover</li>
+        <li>Sprites (of large images)</li> 
         <li>&lsquo;Non-rendered&rsquo; content</li>
         <li>Recalculating / Repainting the UI</li>
         </ul> <p style="font-weight:700; clear:both; ">Static images may render faster than CSS effects</p>
@@ -1435,6 +1441,19 @@ Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
        </section>
     </div>    
  
+
+ <div class="slide object"> 
+<object data="fonts.html"></object>
+     <header><h1>Large and Small Fonts</h1></header> 
+     <a href="fonts.html" class="objectlink" target="_foo">Open it!</a>
+ </div>  
+
+<div class="slide object"> 
+<object data="http://www.fontsquirrel.com/fontface/generator"></object>
+     <header><h1>Large and Small Fonts</h1></header> 
+     <a href="http://www.fontsquirrel.com/fontface/generator" class="objectlink" target="_foo">www.fontsquirrel.com</a>
+ </div>  
+
 <!-- Shadows -->
 <div class="slide normal" style="background-image: url(images/insetshadow.jpg); background-size: 70%; background-position:50% 87%">
      <header>
@@ -2055,6 +2074,7 @@ Slide.prototype = {
   window.addEventListener('popstate', function(e) { _t.go(e.state); }, false);
   doc.getElementById('back').addEventListener('click', function(e) {_t.prev();}, false);
   doc.getElementById('next').addEventListener('click', function(e) {_t.next();}, false);
+  doc.getElementById('four').addEventListener('click', function(e) {_t.addNotes();}, false);
   var visibilityItems = doc.querySelectorAll('ul.visibility li');
 	
 	for (var i = 0; i < visibilityItems.length; i++) {
@@ -2202,7 +2222,7 @@ SlideShow.prototype = {
 			 this.removeHidingClass(); 
 			 break;
 	      case 52: // 4 (for taking notes with local storage (students)
-		     this.addNotes(); break;
+		     this.addNotes(); 
 		     break;
     	}
     },

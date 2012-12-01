@@ -6,6 +6,13 @@ div {
   height: 734px;
   position:relative;
   background-image: url(http://placekitten.com/g/200/200/);
+  background-position: 0 0;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+div:hover {
+  background-position: center;
 }
 div:after {
   content: '';
