@@ -464,6 +464,40 @@ p.link {float: right; font-weight: bold;}
 	-moz-columns: 2;
 	columns: 2;
 }
+
+/* transition with and wirhtout reflow */
+
+	.fcode {
+   color: black;
+   font-size: 85%;
+   background-color: rgba(255,255,255,0.4);
+   -webkit-transition: all 2s ease-in 50ms;
+   -moz-transition: all 2s ease-in 50ms;
+   -ms-transition: all 2s ease-in 50ms;
+   -o-transition: all 2s ease-in 50ms;
+   transition: all 2s ease-in 50ms;
+   border:2px solid;
+}
+.fcode:hover {
+   color: red;
+   background-color: rgba(255,255,255,0.9);
+}
+.fcode:not(.fcode2):hover {
+   font-size: 120%;
+}
+.fcode2:hover {
+	-webkit-transform: scale(1.4);
+	-webkit-transform-origin: top left;
+	-moz-transform: scale(1.4);
+	-moz-transform-origin: top left;
+	-ms-transform: scale(1.4);
+	-ms-transform-origin: top left;
+	-o-transform: scale(1.4);
+	-o-transform-origin: top left;
+	transform: scale(1.4);
+	transform-origin: top left;
+	
+}
 .credit {position:absolute; bottom: 10px; right: 10px; text-shadow: 0 0 4px rgba(255,255,255,0.5);}
 .big, .big * {font-size: 1.6rem;}
 .black {background-color: #000;}
@@ -587,7 +621,6 @@ section td, section th {
 	#presentation-counter, #info, #topinfo, .counter {
 		display: none
 	}
-
 	
 </style>
 </head> 
@@ -613,7 +646,7 @@ section td, section th {
    <div id="presentation-counter"></div>
    <div id="slides">
     <div class="slide"> 
-   <h1 class="intro">Mobile Web Performance</h1>
+   <h1 class="intro">CSS3 + Mobile:<br> Web Performance</h1>
    <div class="books">
        <img src="http://akamaicovers.oreilly.com/images/9780980846904/cat.gif" alt="HTML5 and CSS3 for the Real World">
        <img src="http://akamaicovers.oreilly.com/images/0636920018063/cat.gif" alt="HTML5: The Definitive Guide"/>
@@ -711,44 +744,27 @@ section td, section th {
 
 <h2>Images</h2>
 <ul>
-<li>JPEGs performs better than GIFs and PNGs</li>
-<li>Image energy usage</li>
-<li>Energy used to render images is proportional quantity and size of images.</li>
+<li>JPEGs perform better than GIFs and PNGs</li>
+<li>Images use energy</li>
+<li>Energy used to render images is proportional to quantity and size of images.</li>
 </ul>
 <h2>JavaScript</h2>
 <ul>
-<li>JS (and CSS) can be as expensive to render as IMG</li>
+<li>JS (and CSS) can be as expensive to render as images</li>
 <li>Dynamic JS (like XMLHttpRequest) increases rendering cost (can't be cached). </li>
-<li>JS (download, parsing &amp; executing) can be most energy consuming web pages component
+<li>JS (download, parsing &amp; executing) can be the most energy consuming web page component
 <ul class="temphidden" style="margin-top: 1em;">
-<li>Webpages load large Javascript ﬁles for rendering the web page even though not all of the script is used by the
-
-page.</li>
+<li>Webpages will load and parse all of your scripts, even if they are not used by the page</li>
 <li>
-Shrinking Javascript on a mobile
+Shrinking Javascript on mobile
 
-page to contain only functions used by the page greatly reduces
+sites to contain only functions used by the page greatly reduces
 
 energy use.</li><li> Using Javascript libraries simpliﬁes web
 
 development, but increases the energy used by the resulting pages</li></ul></li></ul>
    </section>
  </div>      
-      
-
- 
- <!-- Gradients - light burst -->
-<div class="slide normal" style="padding:0; overflow:hidden" id="bursts">
-     <object data="bursts.html" style="height:100%; width:100%; border-radius: 18px">
-     <header>
-      <h1>Gradients</h1>
-     </header> 
-     <section>
-     <a href="bursts.html" target="_blank">See Redial Gradients in Action</a>
-     </section>
-     </object>
-    </div>      
-    
     
             
 <!-- Battery consumption -->
@@ -1662,6 +1678,15 @@ media="print<b>,</b> screen and (min-width: 480px)"</pre>
     </div>
     
 
+
+<!--shaders -->
+<div class="slide object">
+<header><h1>Shaders</h1></header>
+<object data="http://html5-demos.appspot.com/static/css/filters/index.html"></object>
+<a href="http://html5-demos.appspot.com/static/css/filters/index.html" target="play" class="objectlink">Visit Site</a>
+</div>
+
+
           
 <!-- Text-indent -->
 <div class="slide normal" style="background-image:url(images/medium_phone.jpg); background-position: 600px 100px;">
@@ -1719,6 +1744,63 @@ Images often faster than Gradients</li>
             }
 	</script>
 </div>  
+
+
+
+
+
+<!-- font transition example -->
+<div class="slide"> 
+<header><h1>transitions</h1></header> 
+<section class="content"> 
+<pre contenteditable class="fcode">code {
+   color: black;
+   font-size: 85%;
+   background-color: rgba(255,255,255,0.9);
+   transition: all 2s ease-in 50ms;
+}
+code:hover {
+   color: red;
+   font-size: 120%;
+   background-color: rgba(255,255,255,0.8);
+}
+</pre>
+<p>Requires reflow!</p>
+</section>
+</div>
+
+
+<!-- font transition example -->
+<div class="slide"> 
+<header><h1>transitions with transforms</h1></header> 
+<section class="content"> 
+<pre contenteditable class="fcode fcode2">code {
+   color: black;
+   font-size: 85%;
+   background-color: rgba(255,255,255,0.9);
+   transition: all 2s ease-in 50ms;
+}
+code:hover {
+   color: red;
+   transform: scale(1.4);
+   transform-origin: 0 0;
+   background-color: rgba(255,255,255,0.8);
+}
+</pre>
+
+<p>Only repaints</p>
+</section>
+</div> 
+  
+
+
+
+
+
+
+
+
+
     
 <!-- 3D Transforms -->
 <div class="slide normal" style="background-image:url(images/panacea.png); background-position: 50% 65%;">
@@ -1850,7 +1932,15 @@ Images often faster than Gradients</li>
     </section>
 </div>
 
-
+<!-- Reflow video --> 
+<div class="slide normal">
+    <header>
+        <h1>Reflow</h1>
+    </header> 
+    <section>        
+<iframe width="560" height="420" src="http://www.youtube.com/embed/dndeRnzkJDU" frameborder="0" style="display: block; margin:60px auto" allowfullscreen></iframe>
+</section>
+</div>
 
 <!-- minimize DOM -->
 <div class="slide normal">
