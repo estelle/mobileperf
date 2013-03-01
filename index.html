@@ -601,7 +601,8 @@ section td, section th {
 #four {cursor:move;}
 
 p.img img {height: 40px; vertical-align: bottom; position: relative; top: 5px;}
-
+.author {width: 32%; float: left; text-align: center; margin-top: 50px;}
+.author:first-line {font-weight: bold;}
 
 @media print {
   .slide {
@@ -694,6 +695,23 @@ p.img img {height: 40px; vertical-align: bottom; position: relative; top: 5px;}
 </div>
 
 
+<div class="slide normal">
+<header><h1>What that means....</h1></header>
+<section class="content">
+<pre contenteditable style="font-size: 1.4rem;">&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+ &lt;head&gt;
+   &lt;meta charset=&quot;UTF-8&quot;&gt;
+   &lt;title&gt;Titles are good for SEO&lt;/title&gt;
+   &lt;link rel=&quot;stylesheet&quot; href=&quot;prettyWhenItLoads.<strong>css</strong>&quot;/&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+   &lt;!-- lots of good content --&gt;
+   &lt;script src=&quot;dontBlockHTMLandCSS.<strong>js</strong>&quot;&gt;&lt;/script&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+</section>
+</div>
 
 
 
@@ -701,7 +719,7 @@ p.img img {height: 40px; vertical-align: bottom; position: relative; top: 5px;}
  <!--YSLOW -->
 <div class="slide normal">
   <header>
-    <h1>YSLOW<img src="images/yslow.png" alt="" style="vertical-align:middle;  margin-left: 20px;"></h1>
+    <h1>Resource: YSLOW<img src="images/yslow.png" alt="" style="vertical-align:middle;  margin-left: 20px;"></h1>
   </header>
   <section>
   <ul class="visibility">
@@ -784,7 +802,7 @@ p.img img {height: 40px; vertical-align: bottom; position: relative; top: 5px;}
 <!-- Page Speed -->
 <div class="slide normal">
   <header>
-    <h1>Page Speed <img src="images/pagespeed.png" alt="" style="vertical-align:middle; margin: 0 0 0 20px" ></h1>
+    <h1>Resource: Page Speed <img src="images/pagespeed.png" alt="" style="vertical-align:middle; margin: 0 0 0 20px" ></h1>
   </header>
   <section class="content columns">
    <ul class="columns2">
@@ -868,21 +886,26 @@ p.img img {height: 40px; vertical-align: bottom; position: relative; top: 5px;}
      <header><h1>Batteries</h1>
      </header>
      <section style="background-image:url(images/carbattery.jpeg) , url(images/battery.jpg); background-position: bottom left, 80% 90%; background-size: auto, 130px;height:600px;">
-
+<h1 style="text-align: center"><a href="http://www2012.org/proceedings/proceedings/p41.pdf">Who Killed My Battery:</a>
+Analyzing Mobile Browser Energy Consumption</h1>
+<div class="author">Narendran Thiagarajany</br>
+naren@cs.stanford.edu</div>
+<div class="author">Gaurav Aggarwaly</br>
+agaurav@cs.stanford.edu</div>
+<div class="author">Angela Nicoara*</br>
+angela.nicoara@telekom.com</div>
+<div style="float:right; color: #E65F00; font-size: 100px; margin:50px; font-weight: bold;" class="temphidden">TL;DR;</div>
      </section>
     </div>
 
- <div class="slide object">
+<!-- <div class="slide object">
 <object data="http://www2012.org/proceedings/proceedings/p41.pdf"></object>
      <header><h1>Who Killed My Battery</h1></header>
+     <h1 class="em temphidden" style="position: absolute; top: 200px; left: 0; right:0; text-align: center;font-size: 7rem;">TL;DR;</h1>
+
      <a href="http://www2012.org/proceedings/proceedings/p41.pdf" class="objectlink" target="_foo">Download PDF</a>
- </div>
+ </div> -->
 
- <div class="slide intro">
-     <header><h1 class="em" style="font-size: 7rem; margin:150px auto">TL;DR;</h1></header>
-     <section></section>
-
- </div>
 
 
 <div class="slide normal">
@@ -956,23 +979,6 @@ development, but increase energy use.</li>
      </section>
     </div>
 
-<div class="slide normal">
-<header><h1>What that means....</h1></header>
-<section class="content">
-<pre contenteditable style="font-size: 1.4rem;">&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
- &lt;head&gt;
-   &lt;meta charset=&quot;UTF-8&quot;&gt;
-   &lt;title&gt;Titles are good for SEO&lt;/title&gt;
-   &lt;link rel=&quot;stylesheet&quot; href=&quot;prettyWhenItLoads.<strong>css</strong>&quot;/&gt;
- &lt;/head&gt;
- &lt;body&gt;
-   &lt;!-- lots of good content --&gt;
-   &lt;script src=&quot;dontBlockHTMLandCSS.<strong>js</strong>&quot;&gt;&lt;/script&gt;
- &lt;/body&gt;
-&lt;/html&gt;</pre>
-</section>
-</div>
 
 
 
