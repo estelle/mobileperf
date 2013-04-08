@@ -1,0 +1,1836 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--[if gte IE 9]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+    <!--[if lt IE 9]><meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" /><![endif]-->
+<meta charset="utf-8" />
+    <title>Mobile Web Performance</title>
+<!--
+Made by: Estelle Weyl
+Copyright:  CC-SA-NC-BY - Creative Commons Attribution-NonCommercial-ShareAlike
+-->
+<style>
+:root {font-size: 125%;}
+div, section {background-repeat:no-repeat;}
+body {
+  font-family:Helvetica,  "Trebuchet MS",Arial, sans-serif, 'Droid Sans';
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px; top: 0px;
+}
+.bigger {font-size: 120%;}
+
+#info {
+  font-size: small;
+  position: absolute;
+  bottom: 0px;
+  left: 40%;
+  z-index: 500;
+  color: #fff;
+}
+/* optional */
+#topinfo {
+  font-size: small;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 500;
+}
+.key {
+  color: black;
+  display: inline-block;
+  padding: 3px 3px 3px 3px;
+  text-shadow: none;
+  letter-spacing: 0;
+  position: relative;
+  background: white;
+  border-radius: 5px;
+  font-weight: bold;
+  text-shadow: 0 0 1px currentColor;
+  }
+#presentation {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  display: block;
+  overflow: hidden;
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: rgba(255,255,255,0);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0.70, rgba(255,255,255,0)), color-stop(0.3, rgba(255,255,255,0.5)));
+  background: -webkit-linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 5px, rgba(255,255,255,0.5) 5px, rgba(255,255,255,0.5) 100%);
+  background: -moz-linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 5px, rgba(255,255,255,0.5) 5px, rgba(255,255,255,0.5) 100%);
+  background: -ms-linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 5px, rgba(255,255,255,0.5) 5px, rgba(255,255,255,0.5) 100%);
+  background: -o-linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 5px, rgba(255,255,255,0.5) 5px, rgba(255,255,255,0.5) 100%);
+  background: linear-gradient(to left, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 5px, rgba(255,255,255,0.5) 5px, rgba(255,255,255,0.5) 100%);
+  -moz-background-size: 7px 7px;
+  background-size: 7px 7px;
+  background-repeat: repeat;
+  background-color: #C5CCD4;
+  transition: 1s;
+}
+body > header, body > footer {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  z-index: 500;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 50%, from(rgba(176, 188, 205, 1)), to(rgba(129, 149, 175, 1)));
+  background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.0) 100%);
+  background-image: -moz-linear-gradient(top, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.0) 100%);
+  background-image: -ms-linear-gradient(top, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.0) 100%);
+  background-image: -o-linear-gradient(top, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.0) 100%);
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.0) 100%);;
+  padding: 7px 10px;
+  background-color: #8195AF;
+  display: block;
+  height: 42px;
+  border-bottom: 1px solid #2C3542;
+  border-top: 1px solid #CDD5DF;
+  -webkit-transition: 1s;
+}
+body > header h1 {
+  color: white;
+  font-family: Helvetica;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: auto;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-shadow: rgba(0, 0, 0, 0.4) 0px -1px 0px;
+  letter-spacing: -1px;
+  white-space: nowrap;
+  max-width: 400px;
+}
+
+@media screen and (orientation: portrait){
+  body > header,
+  body > footer,
+  body #next, body #back,
+  #presentation {
+    background-color:indianred;
+  }
+}
+@media screen and (max-width: 500px){
+  body > header,
+  body > footer,
+  body #next, body #back,
+  #presentation {
+    background-color:goldenrod;
+  }
+
+}
+
+.slides {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  display: block;
+  -webkit-transition: -webkit-transform 1s ease-in-out;
+  -moz-transition: -moz-transform 1s ease-in-out;
+  -ms-transition: -ms-transform 1s ease-in-out;
+  -o-transition: -o-transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  transform: scale(0.8);
+}
+.slide {
+  display: none;
+  position: absolute;
+  overflow: hidden;
+  width: 900px;
+  height: 700px;
+  left: 50%;
+  top: 50%;
+  margin-top: -350px;
+  background-color: #eee;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -ms-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  padding-left: 20px;
+  padding-top: 10px;
+  background-color: #ffffff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  border: 2px solid #A8ABAE;
+
+}
+.slide.intro {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.slide.intro header h1 {
+  font-size: 3rem;
+}
+.slide.intro hgroup {
+  margin-top: 200px;
+}
+.slide textarea.mynotes {
+    -webkit-appearance: none;
+    border: 1px #aaa solid;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1.2rem;
+    font-style: italic;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.3);
+    padding: 5px;
+    box-sizing: border-box;
+    font-family:"Palatino Linotype", "Book Antiqua", Palatino, cursive,serif;
+   }
+.content td {
+  border: 1px solid black;
+}
+.invalid {
+  background-color: red;
+}
+.slide.section,.slide.intro {
+  text-align: center;
+}
+.slide.section,.slide.intro header {
+  font-size: 2.5rem;
+}
+.slide li {
+    margin-bottom: 10px;
+}
+.slide img {
+  max-height: 90%;
+  text-align: center;
+}
+.slide .counter {
+  color: #999999;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  display: block;
+  font-size: 0.7rem;
+}
+.slide.title > .counter,
+.slide.segue > .counter,
+.slide.mainTitle > .counter {
+  display: none;
+}
+.force-render {
+  display: block;
+  visibility: hidden;
+}
+.slide.far-past {
+  display: block;
+  margin-left: -2400px;
+}
+.slide.past {
+  visibility: visible;
+  display: block;
+  margin-left: -1400px;
+}
+.slide.current {
+  visibility: visible;
+  display: block;
+  margin-left: -450px;
+}
+.slide.future {
+  visibility: visible;
+  display: block;
+  margin-left: 500px;
+}
+.slide.far-future {
+  display: block;
+  margin-left: 1500px;
+}
+
+/* Content */
+
+.slide header {
+  font-weight: normal;
+  letter-spacing: -.05em;
+  text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;
+  left: 30px;
+  top: 25px;
+  font-size: 2rem;
+}
+h1 {
+  font-size:2rem;
+  margin-bottom: 0px;
+}
+h2 {
+  font-size: 1.6rem;
+}
+h1:first-child {
+  margin-top: 0;
+}
+section, footer {
+  text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;
+  margin: 20px 30px 0;
+  display: block;
+  overflow: hidden;
+}
+footer {
+  font-size: 1rem;
+  margin: 20px 0 0 30px;
+}
+a {
+  color: inherit;
+  display: inline-block;
+  text-decoration: none;
+  line-height: 110%;
+}
+a, .em {
+  color: #E65F00;
+
+}
+a:hover {
+  text-decoration: underline;
+}
+pre {
+  text-align: left;
+  font-size: 1.4rem;
+  padding: 10px 20px;
+  background: rgba(218,218,220, 0.5);
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  border: 1px solid white;
+}
+pre b {
+  font-weight: normal;
+  color: #c61800;
+  text-shadow: #c61800 0 0 1px;
+/*letter-spacing: -1px;*/}
+pre em {
+  font-weight: normal;
+  font-style: normal;
+  color: #18a600;
+  text-shadow: #18a600 0 0 1px;
+}
+div.example {
+  display: block;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+#presentation-counter {
+  color: #ccc;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+#next,
+#back {
+  z-index: 1000;
+  position:absolute;
+  top: 5px;
+  left: 5px;
+  list-style-type: none;
+  -webkit-appearance: none;
+  border: none;
+  padding: 5px 10px;
+  letter-spacing:1px;
+  font-size: 1rem;
+  box-shadow: inset 0 0 2px rgba(0,0,0,0.3),
+    2px 2px 5px rgba(0,0,0,0.7);
+  border: 3px solid #eee;
+  color: white;
+  text-decoration: none;
+  background-image: -webkit-gradient(linear, top, bottom, from(rgba(255, 255, 255, 0.4)), to(rgba(255, 255, 255, 0.1)));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  max-width: 3rem;
+  white-space: nowrap;
+  font-family: Helvetica;
+  font-size: 14px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 10px;
+  -moz-background-size: 100% 50%;
+  background-size: 100% 50%;
+  background-repeat: no-repeat;
+  border: 1px solid #2F353E;
+  -moz-box-shadow: 0 1px 0 rgba(255,255,255, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+
+  float: right;
+  background-color: #2463DE;
+}
+#next {
+  left: auto; right: 5px;
+  background-color: #4A6C9B;
+  border-color: #2F353E #375073 #375073;
+}
+
+.books {
+    -webkit-transform:scale(0.9);
+    -webkit-transform-origin: 0 0;}
+.books img {margin: 160px 15px 0 15px;}
+
+h1.intro {
+  font-size: 3rem;
+  margin: auto;
+  color: #E65F00;
+  }
+
+.deprecated dt {
+
+    margin-bottom: 1rem;
+  }
+  dt {
+    font-weight: bold;
+    margin-top: 0.5rem;
+    background-color: #C5CCD4;
+    padding: 3px 5px;
+    display: inline-block;
+    margin-bottom: 2px;
+    clear: both;
+  }
+  .deprecated dd {
+    display: none;
+    font-weight: normal;
+    margin: 0 0 2px 0;
+  }
+  .deprecated dt:hover + dd {
+    display: inherit;
+  }
+/* OBJECT PAGES */
+.object header {
+  position:absolute;
+  top: 10px;
+  width: 100%;
+  text-align:center;
+  background-color: rgba(255,255,255,0.9);
+  left:0;
+}
+.objectlink {
+  position:absolute;
+  top:0; right:0;
+  color: white;
+  background-color: #000;
+  padding: 3px 5px;
+  border: none;
+}
+.slide.object {padding:0;}
+.object object {width: 100%; height: 100%;}
+.notes, .temphidden {display: none;}
+
+.hidenotes {display: none;}
+
+.visible .hidenotes {
+  display: inherit;
+  font-size: inherit;
+  background-color: #DEDEDE;
+  padding: 5px;
+  font-weight: normal;
+  list-style-type: none;
+  cursor: none
+}
+.visibility li {cursor: pointer;}
+.half {opacity: .3;}
+p.link {float: right; font-weight: bold;}
+.columns ul,
+.columns2 {
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  columns: 2;
+}
+
+/* transition with and wirhtout reflow */
+
+  .fcode {
+   color: black;
+   font-size: 85%;
+   background-color: rgba(255,255,255,0.4);
+   -webkit-transition: all 2s ease-in 50ms;
+   -moz-transition: all 2s ease-in 50ms;
+   -ms-transition: all 2s ease-in 50ms;
+   -o-transition: all 2s ease-in 50ms;
+   transition: all 2s ease-in 50ms;
+   border:2px solid;
+}
+.fcode:hover {
+   color: red;
+   background-color: rgba(255,255,255,0.9);
+}
+.fcode:not(.fcode2):hover {
+   font-size: 120%;
+}
+.fcode2:hover {
+  -webkit-transform: scale(1.4);
+  -webkit-transform-origin: top left;
+  -moz-transform: scale(1.4);
+  -moz-transform-origin: top left;
+  -ms-transform: scale(1.4);
+  -ms-transform-origin: top left;
+  -o-transform: scale(1.4);
+  -o-transform-origin: top left;
+  transform: scale(1.4);
+  transform-origin: top left;
+
+}
+.credit {position:absolute; bottom: 10px; right: 10px; text-shadow: 0 0 4px rgba(255,255,255,0.5);}
+.big, .big * {font-size: 1.6rem;}
+.black {background-color: #000;}
+.black h1 {color: #fff;}
+.black p {color: #fff; font-size: 1.6rem; }
+
+table {
+  margin: auto;
+  border: 1px solid #dedede;
+  border-collapse: collapse;
+  border-spacing:0;
+}
+section td, section th {
+   border: none;
+   font-size: 30px;
+   padding: 4px;
+}
+.th {
+  margin: 20px auto;
+}
+.rowed tr:nth-of-type(even),
+.rowed th,
+.th th {
+  background-color: #dedede;
+}
+.th th,
+.th td {
+  padding: 10px;
+  border: 1px solid #bbb;
+}
+.th td {
+  text-align: center;
+  border: 1px solid #dedede;
+  border-collapse:collapse;
+}
+.htc {
+  color: #ffffff;
+  width: 320px;
+  background-color: #666;
+}
+.htc tbody {
+  max-height: 300px;
+  overflow:scroll;
+}
+.htc td, .htc th {
+  font-size: 14px;
+  padding: 2px 4px;
+}
+.htc thead {
+  background-image: -webkit-linear-gradient(top,
+    #333, #aaa, #333);
+}
+.htc tfoot tr td {color: #000;}
+.htc tbody tr:nth-of-type(odd) {font-weight: bold;}
+.htc tbody tr:nth-of-type(even) {color: #ccc;}
+
+.htc tbody tr:nth-of-type(4n-3),
+.htc tbody tr:nth-of-type(4n-2){
+  background-color: black;
+ }
+
+ .htc tbody tr:nth-of-type(even) td{
+  padding-bottom: 4px;
+ }
+ .htc tbody tr:nth-of-type(odd) td{
+  padding-top: 4px;
+ }
+
+ .onehundred{ padding: 10px; background-color: #dedede;}
+.onehundred img { margin:5px;}
+.onehundred span {
+  display:inline-block;
+  text-align:center;
+  font-size: 40px;
+  margin: 5px;
+}
+.whitened {
+    border-radius: 20px;
+    background-color:rgba(255,255,255,0.6);
+    text-shadow: 1px 1px #fff;
+    float: left;
+    padding: 10px;
+  }
+   #largegradient:hover {
+    background-image:url(images/hugegradient.jpg);
+    background-position: -125px -26px;
+  }
+#fonts img  {
+    display: block;
+    margin: 30px auto;
+    width: 700px;
+  }
+ #bcksizeexample2 {
+  float: right;
+  box-shadow: inset 5px 5px 5px rgba(0,0,0,0.4),inset -5px -5px 5px rgba(0,0,0,0.4) ;
+  width: 150px;
+  height:250px;
+  background-position: 50%;
+  background-image: url(http://placekitten.com/g/200/200/);
+}
+#four {cursor:move;}
+
+p.img img {height: 40px; vertical-align: bottom; position: relative; top: 5px;}
+.author {width: 32%; float: left; text-align: center; margin-top: 50px;}
+.author:first-line {font-weight: bold;}
+
+@media print {
+  .slide {
+    page-break-inside: avoid;
+    page-break-after: always;
+    visibility: visible !important;
+    font-size: 20pt;
+    font-family: Arial, sans-serif;
+  }
+  @page {
+    size: landscape;
+  }
+  body {
+    font-size: 12pt;
+    background: white;
+  }
+  header h1 {
+    border-top: 2pt solid gray;
+    border-bottom: 1px dotted silver;
+  }
+  #presentation-counter, #info, #topinfo, .counter {
+    display: none
+  }
+
+</style>
+</head>
+
+<body>
+<header>
+<nav>
+<h1>Mobile Web Performance</h1>
+<ul>
+  <li class="button cancel" id="back">Back</li>
+    <li class="button done" id="next">Next</li>
+</ul>
+</nav>
+</header>
+<!-- Top instructions -->
+<div id="topinfo"></div>
+<!-- footer instructions -->
+<div id="info">
+    <p><a href="http://standardista.com">Estelle Weyl</a> | <a href="http://twitter.com/estellevw">@estellevw</a> | <a href="http://github.com/estelle">Github</a> | Press <span class="key">&rarr;</span> to advance, <span class="key">2</span> for comments, <span class="key" id="four">4</span> to read/write notes.</p>
+</div>
+
+  <div id="presentation">
+   <div id="presentation-counter"></div>
+   <div id="slides">
+    <div class="slide">
+   <h1 class="intro">Mobile CSS3:
+Pointers and Pitfalls in the mobile space</h1>
+   <div class="books">
+       <img src="http://akamaicovers.oreilly.com/images/9780980846904/cat.gif" alt="HTML5 and CSS3 for the Real World">
+       <img src="http://akamaicovers.oreilly.com/images/0636920018063/cat.gif" alt="HTML5: The Definitive Guide"/>
+       <img src="http://akamaicovers.oreilly.com/images/0636920021711/cat.gif" alt="MObile HTML5"/>
+       <img src="http://akamaicovers.oreilly.com/images/0636920025955/cat.gif" alt="Web Performance Daybook"/>
+   </div>
+    <br style="clear:both;">Slides: <a href="http://estelle.github.com/mobileperf/30.html">estelle.github.com/mobileperf/30.html</a>
+    <br/>Name: Estelle Weyl
+    <br>Blog: <a href="http://standardista.com">standardista.com</a>
+    <br>Twitter: <a href="http://twitter.com/estellevw">@estellevw</a></p>
+</div>
+
+
+
+<div class="slide intro" style="background:url(images/latencykills.jpg) bottom center no-repeat #ffffff;">
+     <header>
+      <h1>Latency</h1>
+     </header>
+     <section>
+     <footer class="credit">Photo: <a href="http://www.flickr.com/photos/tby/1472668838/">T Bryce Yehl</a></footer>
+     </section>
+    </div>
+
+
+
+
+
+
+
+
+<div class="slide intro">
+  <header><h1>Step 1: Don't Redirect!!!!</h1></header>
+    <section class="content">
+    </section>
+</div>
+<div class="slide intro">
+  <header><h1>Step 2: Reduce Requests</h1><h2>Sprites</h2></header>
+    <section class="content">
+    <img src="../yslow/sprite.jpg" alt="Favicon Image Sprite"/style="margin: 200px;">
+    </section>
+</div>
+
+
+
+
+
+
+<!-- TERM: Memory -->
+<div class="slide intro black" style="background-image:url(images/memory.gif); background-position: bottom;">
+    <header>
+      <h1>Memory</h1>
+    </header>
+    <section  style="padding-top: 200px;">
+      <p class="temphidden">High memory usage causes a slow UI</p>
+      <p class="temphidden">When you are out of memory, you are out of memory</p>
+        <p class="temphidden">Browser crashes to free up memory</p>
+    </section>
+</div>
+
+
+
+<div class="slide">
+  <header><h1>Sprites: Best choice?</h1></header>
+    <section class="content">
+    <img src="../yslow/sprite.jpg" alt="Favicon Image Sprite"/style="margin: 200px;">
+    </section>
+</div>
+
+<!--GZip does not suffice -->
+<div class="slide normal">
+     <header>
+      <h1>Not enough to <big>GZip</big></h1>
+     </header>
+     <section class="big">
+
+     <p style="margin: 0 -20px;"><img src="images/gzipbig.png" alt="" style="vertical-align:middle">
+    <img src="images/arrow.png" alt="" style="vertical-align:middle">
+     <img src="images/gzipsmall.jpg" alt="" style="vertical-align:middle">
+     <img src="images/arrow.png" alt="" style="vertical-align:middle">
+     <img src="images/gzipbig.png" alt="" style="vertical-align:middle"></p>
+     <p style="text-align:center;" class="em">Rendered media are still the same size.</p>
+     <ul class="sevenless">
+       <li>         Reduce File Size       </li>
+       <li>         Reduce Image Size       </li>
+     </ul>
+     <p class="notes">Video, Audio, Images and Text can be compressed to save bandwidth, but they're uncompressed in the browser.</p>
+     </section>
+    </div>
+
+<!-- Reduce File Size - ImageAlpha -->
+<div class="slide normal">
+     <header>
+      <h1>Reduce File Size</h1>
+     </header>
+     <section>
+
+     <img src="images/imagealpha.jpg" alt="images alpha saving 64% file size" width="700" style="margin:auto; display:block">
+     <h1>Image Alpha <img src="images/ImageAlpha_med.png" alt="" style="vertical-align:middle"></h1>
+     <footer class="credit"><a href="http://pngmini.com/">www.pngmini.com/</a></footer>
+     </section>
+    </div>
+
+
+<!-- Reduce Image Size - Sencha IO-->
+<div class="slide normal">
+    <header>
+      <h1>Reduce Image Size</h1>
+    </header>
+    <section style="background:url(images/tinySrc.jpg) top no-repeat; min-height:500px; background-size: contain; padding:20px;">
+    <p style="color:#fff; padding-top: 40px; line-height: 1.4;text-shadow:1px 1px 3px #000,-1px -1px 3px #000; font-weight:bold;">Don't send <big>big</big> images to <small>small</small> screens?<br>
+Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
+    <ul style="font-size: 30px; line-height:2; float:left; padding: 10px; background-color: rgba(0,0,0,0.5); border-radius: 20px; margin-top: 100px; list-style-type:none;">
+        <li><a href="http://i.tinysrc.mobi/http://kittenssite.com/kitten.jpg"  target="play">http://i.tinysrc.mobi/http://kittenssite.com/kitten.jpg</a></li>
+        <li><a href="http://src.sencha.io/http://kittenssite.com/kitten.jpg" target="play">http://src.sencha.io/http://kittenssite.com/kitten.jpg</a></li>
+        <li><a href="http://src.sencha.io/320/480/http://kittenssite.com/kitten.jpg" target="play">http://src.sencha.io/320/480/http://kittenssite.com/kitten.jpg</a></li>
+    </ul>
+    <img src="images/senchio.gif" alt="sencha uses user agent sniffing,not browser size" class="temphidden" style="position: absolute; right: 10px; top: 200px;"/>
+    <p class=" half">Change your user agent and click on links above</p>
+   <footer class="credit">Photo: <a href="http://www.hdwallpapers4ipad.com/photo/abstract_backgrounds/broken_screen/2-0-1568">hdwallpapers4ipad.com</a></footer>
+    </section>
+</div>
+
+<
+
+
+
+<!-- Reduce File Size - JPG not PNG, with Masking -->
+<div class="slide normal">
+     <header>
+      <h1>CSS Masking</h1>
+     </header>
+     <section>
+
+     <p class="onehundred">
+     <img src="images/frame.jpg" alt="jpeg" width="160">
+     <img src="images/plus.gif" alt="plus" width="100">
+     <img src="images/framemask.png" alt="framemask" width="160">
+     <img src="images/lessthan.gif" alt="less than" width="100">
+     <img src="images/frame2.png" alt="transparent png" width="160"><br>
+     <span style="width: 160px;">88KB</span>
+     <span style="width: 100px;"> + </span>
+     <span style="width: 160px;"> 4KB </span>
+     <span style="width: 100px;"> &lt; </span>
+     <span style="width: 160px;"> 551KB</span>
+     </p>
+     <pre contenteditable>div {
+  background-image:url(images/frame.jpg);
+  -webkit-mask: url(images/framemask.png);
+}</pre>
+     </section>
+    </div>
+
+ <div class="slide object">
+<object data="mask/index.html"></object>
+     <header><h1>Masking example</h1></header>
+     <a href="mask/mask.zip" class="objectlink" target="_foo">Download Zip</a>
+ </div>
+
+<!-- CSS3 Options -->
+<div class="slide normal">
+     <header>
+      <h1>Is CSS3 the Solution?</h1>
+     </header>
+     <section>
+     <div style="float: left; width: 50%">
+     <h2>Properties</h2>
+     <ul class="big">
+        <li>rounded Corners</li>
+        <li>box-shadow</li>
+        <li>text-shadow</li>
+        <li>background-position</li>
+        <li>background-repeat</li>
+        <li>multiple background images</li>
+        <li>border-image</li>
+      <li>gradients</li>
+        <li>@media queries</li>
+     </ul>
+     </div>
+     <div style="float: left; width: 50%">
+     <h2>Benefits</h2>
+     <ul class="big">
+        <li>Fewer HTTP Requests</li>
+        <li>Updatable</li>
+        <li>Scalable</li>
+        <li>Transitionable</li>
+        <li>Animatable</li>
+        <li>Fewer DOM Nodes</li>
+     </ul>
+     </div>
+     </section>
+    </div>
+
+<!-- List of CSS properties that risk slowing you down -->
+<div class="slide normal" style="background-image:url(images/bugsbunny.jpg); background-size:cover">
+     <header>
+      <h1>CSS3 <span style="-webkit-text-stroke: #fff 1px;">ISN'T</span> always the Solution!</h1>
+      <h2 style="font-size: 40px">UI Features can ruin your web app</h2>
+     </header>
+     <section>
+     <ul class="big whitened" >
+      <li>Enlarged Fonts</li>
+      <li>Box Shadow (inset)</li>
+      <li>Text Indent</li>
+      <li>Gradients</li>
+        <li>background-size: cover</li>
+        <li>Sprites (of large images)</li>
+        <li>&lsquo;Non-rendered&rsquo; content</li>
+        <li>Recalculating / Repainting the UI</li>
+        </ul> <p style="font-weight:700; clear:both; ">Static images may render faster than CSS effects</p>
+
+<footer class="credit">Disney: "The Tortoise and The Hare"</footer>
+     </section>
+    </div>
+
+<!-- Tall fonts -->
+<div class="slide normal">
+     <header>
+      <h1>Fonts</h1>
+     </header>
+     <section id="fonts">
+       <img src="images/tallfont_02.gif" alt="Fonts with Tall Ascenders">
+       <img src="images/tallfont_03.gif" alt="Fonts with Tall Ascenders">
+       <img src="images/tallfont_04.gif"  alt="Fonts with Tall Ascenders">
+       <img src="images/tallfont_05.gif"  alt="Fonts with Tall Ascenders">
+       <footer class="notes">Fonts: Zapfino, Helvetica, Savoye<br>
+    Amount of space painted is large!</footer>
+
+       </section>
+    </div>
+
+
+ <div class="slide object">
+<object data="fonts.html"></object>
+     <header><h1>Large and Small Fonts</h1></header>
+     <a href="fonts.html" class="objectlink" target="_foo">Open it!</a>
+ </div>
+
+<div class="slide object">
+<object data="http://www.fontsquirrel.com/fontface/generator"></object>
+     <header><h1>Large and Small Fonts</h1></header>
+     <a href="http://www.fontsquirrel.com/fontface/generator" class="objectlink" target="_foo">www.fontsquirrel.com</a>
+ </div>
+
+<!-- Shadows -->
+<div class="slide normal" style="background-image: url(images/insetshadow.jpg); background-size: 70%; background-position:50% 87%">
+     <header>
+      <h1>Shadows</h1>
+     </header>
+     <section>
+     <ul class="big">
+    <li>Not rendered as static bitmap</li>
+    <li>Evaluated  each repaint</li>
+     </ul>
+     <footer>Render order: rendered from back to front</footer>
+     </section>
+    </div>
+
+
+
+<!--shaders -->
+<div class="slide object">
+<header><h1>Shaders</h1></header>
+<object data="http://html5-demos.appspot.com/static/css/filters/index.html"></object>
+<a href="http://html5-demos.appspot.com/static/css/filters/index.html" target="play" class="objectlink">Visit Site</a>
+</div>
+
+
+
+<!-- Text-indent -->
+<div class="slide normal" style="background-image:url(images/medium_phone.jpg); background-position: 600px 100px;">
+     <header>
+      <h1>Text-indent</h1>
+     </header>
+     <section>
+     <div style="position:absolute; left: 40px; top: 240px; padding:5px;">MyLogo Text</div>
+     <div style="position:absolute; left: 660px; top: 240px; border-radius:50%; background-color:#F39; color:#fff; padding:5px;">Logo</div>
+     <div style="position:absolute; left: 40px; top: 230px; width: 740px; height:80px; border: 2px dashed #ccc;"></div>
+
+     <ul class="sevenless" style="margin-top:300px">
+      <li>Use CSS Clip</li>
+        <li>Position text up instead of left</li>
+
+     </ul>
+     </section>
+    </div>
+
+
+<!-- Gradients -->
+<div class="slide normal" id="largegradient">
+     <header>
+      <h1>Large Gradients</h1>
+     </header>
+     <section>
+     <ul class="big" style="width: 550px"><img src="images/iphonered.png" alt="iphone with large gradient" style="position: absolute; top: 70px; left: 586px"/>
+      <li>Keep gradients small</li>
+        <li>Requires CPU to create</li>
+        <li>Stored in memory</li>
+        <li>Memory: Radial >  Linear </li>
+        <li>Render Speed: <br>
+Images often faster than Gradients</li>
+     </ul>
+
+     </section>
+    </div>
+
+
+
+
+
+
+
+<!-- font transition example -->
+<div class="slide">
+<header><h1>transitions</h1></header>
+<section class="content">
+<pre contenteditable class="fcode">code {
+   color: black;
+   font-size: 85%;
+   background-color: rgba(255,255,255,0.9);
+   transition: all 2s ease-in 50ms;
+}
+code:hover {
+   color: red;
+   font-size: 120%;
+   background-color: rgba(255,255,255,0.8);
+}
+</pre>
+<p>Requires reflow!</p>
+</section>
+</div>
+
+
+<!-- font transition example -->
+<div class="slide">
+<header><h1>transitions with transforms</h1></header>
+<section class="content">
+<pre contenteditable class="fcode fcode2">code {
+   color: black;
+   font-size: 85%;
+   background-color: rgba(255,255,255,0.9);
+   transition: all 2s ease-in 50ms;
+}
+code:hover {
+   color: red;
+   transform: scale(1.4);
+   transform-origin: 0 0;
+   background-color: rgba(255,255,255,0.8);
+}
+</pre>
+
+<p>Only repaints</p>
+</section>
+</div>
+
+
+
+
+
+
+<!-- 3D Transforms -->
+<div class="slide normal" style="background-image:url(images/panacea.png); background-position: 50% 65%;">
+     <header>
+      <h1>Hardware Acceleration: 3d Transforms</h1>
+     </header>
+     <section>
+<pre contenteditable> div {
+  transform: translateZ(0);
+ }</pre>
+
+     <h1>translateZ(0)</h1>
+     <p style="margin-top: 260px;" class="big">Composited mage in memory == <code style="font-weight:bold">H x W x 4</code></p>
+     <p>Take advantage of hardware acceleration, but don't abuse it. GPU accelerated elements eat video <strong>memory</strong></p>
+     </section>
+    </div>
+
+
+
+
+<div class="slide normal">
+     <header><h1>Images</h1></header>
+     <section class="content">
+     <h2>Use background images, instead of foreground images.</h2>
+     <p>Background images are first rendered with image data send to Core Animation. Safari doesn't render &lt;img&gt; first. The decoded image file is sent, as is, pre-rendered, to the Core Animation as a new layer. Foreground images is sent to Core Animation as image data which it has to keep in graphics memory. This uses more memory.</p>
+     </section>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Repaint -->
+<div class="slide normal" style="background-image:url(images/paintbrush.jpg); background-size:cover;">
+     <header>
+      <h1 style="color:#fff">Repaint</h1>
+     </header>
+     <section style="margin:120px 40px 0 30px;" class="whitened">
+     <p>When visual changes do NOT require recalculation of layout</p>
+     <ul class="big">
+      <li>Visibility</li>
+        <li>Colors</li>
+        <li>Transforms</li>
+        <li>Background images</li>
+        <li>Transparency</li>
+     </ul>
+     <footer class="credit">Photo: <a href="http://www.flickr.com/photos/chanbliss/3334163612/">Chanbliss</a></footer>
+     </section>
+    </div>
+
+
+
+<!-- Reflow -->
+<div class="slide normal" style="background-image:url(images/stream.jpg); background-size: cover;">
+    <header>
+        <h1 style="color:#fff">Reflow</h1>
+    </header>
+    <section style="margin:0px 40px 0 30px;" class="whitened">
+        <p>When visual changes REQUIRE recalculation of layout</p>
+        <ul class="big">
+          <li>Page load, Layout &amp; orientation change</li>
+            <li>DOM Changes: Adding, removing, updating nodes</li>
+            <li>JS style information request</li>
+        <li>Changing value of display property</li>
+        <li>Changing to CSS property alters box model value</li>
+          <li style="line-height:1">Resizing, zooming and scrolling (desktop), but not necessarily on mobile devices (viewport)</li>
+
+        </ul>
+        <ul class="notes">
+        <li>The larger a DOM tree, the more expensive a reflow is</li>
+        <li>Opera lists repaint and reflow as one of the 3 main contributors to sluggishness</li>
+        <li>Reflow of an element causes the subsequent reflow of all child and ancestor elements as well as any elements following it in the DOM.</li></ul>
+        <footer class="credit">Photo: <a href="http://www.alaskaadventures.com">Alaska Adventures</a></footer>
+    </section>
+</div>
+
+<!-- Reflow video -->
+<div class="slide normal">
+    <header>
+        <h1>Reflow</h1>
+    </header>
+    <section>
+<iframe width="560" height="420" src="http://www.youtube.com/embed/dndeRnzkJDU" frameborder="0" style="display: block; margin:60px auto" allowfullscreen></iframe>
+</section>
+</div>
+
+<!-- minimize DOM -->
+<div class="slide normal">
+    <header>
+      <h1>Minimize the DOM</h1>
+    </header>
+    <section>
+        <ul class="big">
+            <li>Minimize number of nodes
+              <ul class="temphidden">
+                  <li>Uses up memory</li>
+                    <li>Measures each node for each repaint</li>
+                </ul></li>
+            <li>Cache DOM lookups
+            <ul class="temphidden">
+                  <li>Store them!</li>
+                </ul>
+            </li>
+            <li>Minimize DOM manipulations
+              <ul class="temphidden">
+                  <li>Batch DOM queries &amp; DOM manipulations separately </li>
+                </ul>
+            </li>
+        </ul>
+         <p class="notes" style="margin-top:50px">More nodes = more expensive! </p>
+
+    </section>
+</div>
+
+
+<!-- reuse DOM -->
+<div class="slide normal" style="background-image:url(images/trashcan.jpg); background-position: 5% 95%;">
+    <header>
+      <h1>Reuse the DOM</h1>
+    </header>
+    <section>
+        <p style="font-size: 40px; margin:20px"><strong>Pool</strong> Elements and Objects</p>
+        <p style="font-size: 40px; margin:20px"><strong>Reuse</strong> instead of Allocate and Destroy</p>
+        <img src="images/tetris.gif" alt="tetris" style="float:right;"/>
+        <ol class="big">
+          <li style="line-height:1.3">Create a pool of DOM elements (more than you need)</li>
+            <li>Use the nodes you created</li>
+            <li>Release back into pool</li>
+            <li>Go to step 2</li>
+        </ol>
+    </section>
+</div>
+
+
+
+<div class="slide intro">
+  <header><h1>So, how you doin'?</h1></header>
+    <section class="content">
+    </section>
+</div>
+
+
+<div class="slide object">
+     <object data="http://webwait.com/"></object>
+     <header><h1>How long to load your page?</h1></header>
+     <a href="http://waitwait.com" class="objectlink">WebWait.com</a>
+ </div>
+
+<div class="slide">
+  <header>
+         <h1>Weinre</h1>
+    </header>
+      <section>
+        <ol>
+        <li>Download &amp; Install <a href="http://nodejs.org">Node.js</a> (includes NPM)</li>
+        <li>Install Weinre
+              <pre contenteditable>npm -g install weinre</pre>
+        </li>
+        <li>Start Weinre
+        <pre contenteditable>weinre</pre>
+        </li>
+        <li>Add Weinre to web page
+            <pre contenteditable>&lt;script src="http://localhost:8080/target/target-script-min.js#anonymous"&gt;&lt;/script&gt;</pre>
+        </li>
+        <li>Open the inspector
+            <pre contenteditable>http://localhost:8080/client/</pre>
+        </li>
+        </ol>
+  </section>
+</div>
+
+
+
+<div class="slide normal" style="background-image:url(images/adobe_inspect.png); background-position: right top;">
+     <header><h1>Adobe Shadow/Edge Inspect</h1></header>
+     <section class="content">
+     <ul>
+      <li><a href="http://labs.adobe.com/downloads/shadow.html">Download Adobe Shadow/Edge Insepect</a> desktop application</li>
+        <li>If you're on Windows 7, you might also have to download and install bonjour.</li>
+        <li>Download and install the <a href="https://chrome.google.com/webstore/detail/ijoeapleklopieoejahbpdnhkjjgddem">Adobe Inspect Chrome Extension</a> browser plugin</li>
+        <li>Install the mobile app on each of your devices (free in the app stores)</li>
+        <li>Run the application on your desktop, then minimize the window</li>
+
+        <li>Open the browser extension in Chrome and turn it on</li>
+        <li>Run the application in your devices <ul><li>Click on your desktop when found</li></ul></li>
+        <li>Enter the "pairing" number given by the phone into the Chrome extension pop up window</li>
+        </ul>
+        <img src="images/shadowextension.gif" alt="Adobe Shadow browser extension" style="float:left; margin-right:20px"/>
+        <p>Basically, Weinre on crack, and free version is like automated Weinre.</p>
+     </section>
+ </div>
+
+
+<div class="slide">
+  <header><h1>Tools</h1></header>
+    <section class="content">
+    <ul class="big">
+      <li>Activity Monitor</li>
+      <li>Chrome Developer Tools - Timeline tab</li>
+      <li>Emulators</li>
+    </ul>
+    </section>
+</div>
+
+
+
+
+<div class="slide intro"  style="background-image:url(images/bandaid.png), url(images/broken-lcd.jpg); background-size: 300px, cover; background-position: 75% 27%,top right">
+     <header><h1 style="font-size: 250%">Other Tips</h1></header>
+     <section class="content">
+     <footer class="credit">Photo: <a href="http://www.hdwallpapers4ipad.com/photo/abstract_backgrounds/broken_screen/2-0-1568">hdwallpapers4ipad.com</a></footer>
+     </section>
+ </div>
+
+<!-- Testing -->
+<div class="slide normal">
+    <header>
+      <h1>Test in Real Environments</h1>
+    </header>
+    <section>
+    <img src="images/openapps.jpg" style="margin-right: 20px; float:right;" alt="iPhone showing which apps are running in the background"/>
+        <ul class="big">
+          <li>Test on Phone:
+              <ul>
+                    <li>Simulator != Emulator</li>
+                    <li>Cap your memory</li>
+                </ul>
+                </li>
+          <li>Test with many apps open</li>
+          <li>Test on multiple devices</li>
+          <li>Test on mobile network</li>
+        </ul>
+      </section>
+</div>
+
+
+
+
+<!-- Tricks -->
+<div class="slide normal" style="background-image:url(images/nerdGirl.jpg); background-position: 5% bottom;">
+<header>
+<h1>Tricks</h1>
+</header>
+<section>
+  <ul class="big">
+    <li>Use tools
+      <ul><li>Even basic ones, like Activity Monitor</li></ul></li>
+    <li>Scale down (not up)</li>
+    <li>Use average size fonts</li>
+    <li>Don't disable zoom (except for games)</li>
+  </ul>
+
+  <footer>Credit: <a href="http://nerdquirks.tumblr.com/">NerdQuirks</a></footer>
+</section>
+</div>
+
+<!-- Take Aways -->
+<div class="slide normal" style="background-image:url(images/speed.jpg); background-size:cover;">
+     <header>
+      <h1>Conclusion</h1>
+     </header>
+     <section>
+       <ul class="big whitened" style="margin-top: 20px; float:none;">
+         <li>Follow performance recommendations</li>
+         <li>Minimize Latency</li>
+         <li>Manage memory</li>
+         <li>Use CSS Judiciously</li>
+         <li>Use JS Minimally (and NOT for animation)</li>
+        <li>Batch query and manipulations separately</li>
+        <li>Reuse the DOM</li>
+         <li>Keep Mobile in Mind</li>
+       </ul>
+       <footer>Photo Credit: <a href="http://www.nasa.gov/mission_pages/shuttle/shuttlemissions/sts125/multimedia/gallery/09-05-11-9.html">NASA.gov</a></footer>
+     </section>
+    </div>
+
+
+<!-- It's a phone -->
+<div class="slide normal">
+     <header>
+      <h1>Remember...</h1>
+     </header>
+
+       <section>
+          <h1 style="font-size: 60px; letter-spacing:0px" class="temphidden">Your users may not be tethered</h1>
+          <h1 style="font-size: 60px; letter-spacing:0px" class="temphidden">and their memory may be very limited.</h1>
+     </section>
+    </div>
+
+
+
+
+
+
+
+
+<div class="slide">
+   <h1 class="intro">Thank you</h1>
+   <div class="books">
+       <img src="http://akamaicovers.oreilly.com/images/9780980846904/cat.gif" alt="HTML5 and CSS3 for the Real World">
+       <img src="http://akamaicovers.oreilly.com/images/0636920018063/cat.gif" alt="HTML5: The Definitive Guide"/>
+       <img src="http://akamaicovers.oreilly.com/images/0636920021711/cat.gif" alt="MObile HTML5"/>
+       <img src="http://akamaicovers.oreilly.com/images/0636920025955/cat.gif" alt="Web Performance Daybook"/>
+    </div>
+       <br style="clear:both;">Slides: <a href="http://estelle.github.com/mobileperf">estelle.github.com/mobileperf</a>
+       <br/>Name: Estelle Weyl
+       <br>Blog: <a href="http://standardista.com">standardista.com</a>
+       <br>Twitter: <a href="http://twitter.com/estellevw">@estellevw</a></p>
+    </div>
+</div>
+
+
+
+</div>
+<script>
+(function() {
+  var doc = document,
+      disableBuilds = true,
+    ctr = 0,
+    spaces = /\s+/,
+    a1 = [''],
+      toArray = function(list) {
+      return Array.prototype.slice.call(list || [], 0);
+  },
+    byId = function(id) {
+    if (typeof id == 'string') { return doc.getElementById(id); }
+    return id;
+  },
+
+  query = function(query, root) {
+    if (!query) { return []; }
+    if (typeof query != 'string') { return toArray(query); }
+    if (typeof root == 'string') {
+      root = byId(root);
+      if(!root){ return []; }
+      }
+        root = root || document;
+      var rootIsDoc = (root.nodeType == 9);
+      var doc = rootIsDoc ? root : (root.ownerDocument || document);
+
+    // rewrite the query to be ID rooted
+    if (!rootIsDoc || ('>~+'.indexOf(query.charAt(0)) >= 0)) {
+      root.id = root.id || ('qUnique' + (ctr++));
+      query = '#' + root.id + ' ' + query;
+    }
+
+    // don't choke on something like ".yada.yada >"
+    if ('>~+'.indexOf(query.slice(-1)) >= 0) { query += ' *'; }
+    return toArray(doc.querySelectorAll(query));
+  },
+
+  strToArray = function(s) {
+    if (typeof s == 'string' || s instanceof String) {
+      if (s.indexOf(' ') < 0) {
+        a1[0] = s;
+        return a1;
+      }
+      else {
+          return s.split(spaces);
+      }
+    }
+    return s;
+    },
+
+    addClass = function(node, classStr) {
+    classStr = strToArray(classStr);
+    var cls = ' ' + node.className + ' ';
+    for (var i = 0, len = classStr.length, c; i < len; ++i) {
+    c = classStr[i];
+    if (c && cls.indexOf(' ' + c + ' ') < 0) {
+      cls += c + ' ';
+    }
+    }
+    node.className = cls.trim();
+  },
+
+  removeClass = function(node, classStr) {
+      var cls;
+      if (classStr !== undefined) {
+      classStr = strToArray(classStr);
+      cls = ' ' + node.className + ' ';
+      for (var i = 0, len = classStr.length; i < len; ++i) {
+        cls = cls.replace(' ' + classStr[i] + ' ', ' ');
+      }
+        cls = cls.trim();
+      } else {
+      cls = '';
+      }
+
+      if (node.className != cls) {
+      node.className = cls;
+      }
+
+    },
+
+    toggleClass = function(node, classStr) {
+      var cls = ' ' + node.className + ' ';
+      if (cls.indexOf(' ' + classStr.trim() + ' ') >= 0) {
+      removeClass(node, classStr);
+      } else {
+      addClass(node, classStr);
+      }
+    },
+
+
+
+      ua = navigator.userAgent,
+    isFF = parseFloat(ua.split('Firefox/')[1]) || undefined,
+    isWK = parseFloat(ua.split('WebKit/')[1]) || undefined,
+    isOpera = parseFloat(ua.split('Opera/')[1]) || undefined,
+
+
+
+      canTransition = (function() {
+      var ver = parseFloat(ua.split('Version/')[1]) || undefined;
+      // test to determine if this browser can handle CSS transitions.
+      var cachedCanTransition =
+
+      (isWK || (isFF && isFF > 3.6 ) || (isOpera && ver >= 10.5));
+      return function() { return cachedCanTransition; }
+
+      }
+  )();
+
+
+//-----------------------------------------------------------------//
+
+var Slide = function(node, idx) {
+  this._node = node;
+  if (idx >= 0) {
+    this._count = idx + 1;
+  }
+  if (this._node) {
+    addClass(this._node, 'slide distant-slide');
+  }
+  this._makeCounter();
+  this._makeBuildList();
+};
+
+
+
+Slide.prototype = {
+    _node: null,
+    _count: 0,
+    _buildList: [],
+    _visited: false,
+    _currentState: '',
+    _states: [ 'distant-slide', 'far-past',
+               'past', 'current', 'future',
+               'far-future', 'distant-slide' ],
+    setState: function(state) {
+    if (typeof state != 'string') {
+      state = this._states[state];
+    }
+
+    if (state == 'current' && !this._visited) {
+      this._visited = true;
+      this._makeBuildList();
+    }
+
+    removeClass(this._node, this._states);
+    addClass(this._node, state);
+    this._currentState = state;
+
+
+
+  var _t = this;
+    setTimeout(function(){ _t._runAutos(); } , 400);
+  },
+
+    _makeCounter: function() {
+    if(!this._count || !this._node) { return; }
+
+      var c = doc.createElement('span');
+    c.innerHTML = this._count;
+    c.className = 'counter';
+    this._node.appendChild(c);
+  },
+
+    _makeBuildList: function() {
+    this._buildList = [];
+    if (disableBuilds) { return; }
+
+      if (this._node) {
+      this._buildList = query('[data-build] > *', this._node);
+    }
+
+      this._buildList.forEach(function(el) {
+      addClass(el, 'to-build');
+    });
+  },
+
+    _runAutos: function() {
+    if (this._currentState != 'current') {
+      return;
+    }
+
+      // find the next auto, slice it out of the list, and run it
+
+      var idx = -1;
+    this._buildList.some(function(n, i) {
+      if (n.hasAttribute('data-auto')) {
+        idx = i;
+        return true;
+      }
+
+        return false;
+    });
+    if (idx >= 0) {
+      var elem = this._buildList.splice(idx, 1)[0];
+      var transitionEnd = isWK ? 'webkitTransitionEnd' : (isFF ? 'mozTransitionEnd' : 'oTransitionEnd');
+      var _t = this;
+      if (canTransition()) {
+        var l = function(evt) {
+          elem.parentNode.removeEventListener(transitionEnd, l, false);
+          _t._runAutos();
+        };
+        elem.parentNode.addEventListener(transitionEnd, l, false);
+        removeClass(elem, 'to-build');
+      } else {
+        setTimeout(function() {
+          removeClass(elem, 'to-build');
+          _t._runAutos();
+        }, 400);
+      }
+
+      }
+
+    },
+
+    buildNext: function() {
+    if (!this._buildList.length) {
+      return false;
+    }
+
+      removeClass(this._buildList.shift(), 'to-build');
+    return true;
+  },
+
+  };
+
+
+
+  //
+  // SlideShow class
+  //
+
+  var SlideShow = function(slides) {
+  this._slides = (slides || []).map(function(el, idx) {
+    return new Slide(el, idx);
+  });
+
+
+
+  var h = window.location.hash;
+  try {
+    this.current = parseInt(h.split('#slide')[1], 10);
+  } catch (e) { /* squeltch */ }
+
+  this.current = isNaN(this.current) ? 1 : this.current;
+  var _t = this;
+  doc.addEventListener('keydown', function(e) { _t.handleKeys(e); }, false);
+  doc.addEventListener('mousewheel', function(e) { _t.handleWheel(e); }, false);
+  doc.addEventListener('DOMMouseScroll', function(e) { _t.handleWheel(e); }, false);
+  doc.addEventListener('touchstart',  function(e) { _t.handleTouchStart(e); }, false);
+  doc.addEventListener('touchend', function(e) { _t.handleTouchEnd(e); }, false);
+  window.addEventListener('popstate', function(e) { _t.go(e.state); }, false);
+  doc.getElementById('back').addEventListener('click', function(e) {_t.prev();}, false);
+  doc.getElementById('next').addEventListener('click', function(e) {_t.next();}, false);
+  doc.getElementById('four').addEventListener('click', function(e) {_t.addNotes();}, false);
+  var visibilityItems = doc.querySelectorAll('ul.visibility li');
+
+  for (var i = 0; i < visibilityItems.length; i++) {
+      var element = visibilityItems.item(i); // you must use the item() method. Sorry!
+
+    element.addEventListener('click',
+      function(e) {this.classList.toggle('visible');}, false);
+  }
+
+  this._update();
+};
+
+
+
+SlideShow.prototype = {
+  _slides: [],
+
+    _update: function(dontPush) {
+    document.querySelector('#presentation-counter').innerText = this.current;
+    if (history.pushState) {
+      if (!dontPush) {
+      history.pushState(this.current, 'Slide ' + this.current, '#slide' + this.current);
+        }
+    } else {
+      window.location.hash = 'flopslide' + this.current;
+    }
+      for (var x = this.current-1; x < this.current + 7; x++) {
+        if (this._slides[x-4]) {
+        this._slides[x-4].setState(Math.max(0, x-this.current));
+        }
+      }
+    },
+
+    current: 0,
+
+    next: function() {
+    if(document.querySelector('.current .temphidden')){
+      this.removeHidingClass();
+      return;
+    }
+    if (!this._slides[this.current-1].buildNext()) {
+      this.current = Math.min(this.current + 1, this._slides.length);
+      this._update();
+    }
+   },
+  prev: function() {
+  this.current = Math.max(this.current-1, 1);
+  this._update();
+  },
+
+   go: function(num) {
+    if (!num) return;
+    if (history.pushState && this.current != num) {
+      history.replaceState(this.current, 'Slide ' + this.current, '#slide' + this.current);
+    }
+    this.current = num;
+    this._update(true);
+    },
+
+
+
+  _notesOn: false,
+
+ showNotes: function() {
+    var isOn = this._notesOn = !this._notesOn;
+    query('.notes').forEach(function(el) {
+      el.style.display = (isOn) ? '' : 'none';
+    });
+  },
+
+
+    handleWheel: function(e) {
+    var delta = 0;
+    if (e.wheelDelta) {
+      delta = e.wheelDelta/120;
+      if (isOpera) {
+      delta = -delta;
+      }
+      }
+    else if (e.detail) {
+        delta = -e.detail/3;
+      }
+
+      if (delta > 0 ) {
+      this.prev();
+      return;
+    }
+      if (delta < 0 ) {
+      this.next();
+      return;
+    }
+    },
+
+  addNotes: function(){
+    if(document.querySelector('.current textarea.mynotes')) {
+      document.querySelector('.current textarea.mynotes').classList.toggle('temphidden');
+      return;
+    }
+    var ta = document.createElement('textarea'),
+         currentSlide = document.querySelector('.current section'),
+       path = window.location.pathname,
+       A = path.lastIndexOf('/') + 1,
+       B = path.lastIndexOf('.'),
+       firstPartOfKey, key;
+    if(B && B > A){
+        firstPartOfKey = path.substring(A, B);
+    } else {
+        firstPartOfKey = path.substring(1, path.length-1) || 'home';
+    }
+    //console.log(firstPartOfKey);
+    key = firstPartOfKey +  window.location.hash;
+    ta.value = window.localStorage.getItem(key) || '';
+    ta.className = 'mynotes';
+
+    ta.addEventListener('keyup', function(){
+      //console.log(key + ' ' + ta.value)
+        window.localStorage.setItem(key,ta.value);
+    });
+    currentSlide.appendChild(ta);
+  },
+
+
+  removeHidingClass: function(){
+    var paragraphToShow = document.querySelector('.current .temphidden');
+    if(paragraphToShow) {paragraphToShow.classList.remove('temphidden');}
+
+  },
+
+    handleKeys: function(e) {
+      // disable keys for these elements
+      if (/^(input|textarea|pre|object)$/i.test(e.target.nodeName)) return;
+
+
+      switch (e.keyCode) {
+      case 37: // left arrow
+      case 33: // left clicker
+       this.prev(); break;
+      case 39: // right arrow
+      case 32: // space
+      case 34: // clicker right
+       this.next(); break;
+      case 50: // 2
+      case 190: // 2
+       this.showNotes();
+       this.removeHidingClass();
+       break;
+        case 52: // 4 (for taking notes with local storage (students)
+         this.addNotes();
+         break;
+      }
+    },
+
+    _touchStartX: 0,
+    handleTouchStart: function(e) {
+    this._touchStartX = e.touches[0].pageX;
+  },
+
+    handleTouchEnd: function(e) {
+    var delta = this._touchStartX - e.changedTouches[0].pageX;
+    var SWIPE_SIZE = 150;
+    if (delta > SWIPE_SIZE) {
+      this.next();
+    } else if (delta< -SWIPE_SIZE) {
+       this.prev();
+     }
+    },
+  };
+
+  // Initialize
+  var slideshow = new SlideShow(query('.slide'));
+})();
+
+
+
+  </script>
+  <script src="prefixfree.js"></script>
+  <!--[if lt IE 9]>
+  <script
+
+  src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({ mode: "overlay" });</script>
+  <![endif]-->
+<script defer>
+  (function(){
+  // if local storage not supported, quit
+  try {
+    (window.localStorage.getItem)
+  } catch(e){
+    return;
+  }
+
+  var textarea = document.querySelector('#ls');
+
+
+  // place content from local storage on load if there is one
+  if (!textarea.value) {
+    textarea.value = window.localStorage.getItem('value');
+  }
+
+  updateLog(false);
+
+
+  // your content will be saved locally
+  document.querySelector('#clearLocalstorage').addEventListener('click', function () {
+    window.localStorage.clear();
+  }, false);
+
+
+  document.querySelector('#savelocalstorage').addEventListener('click', function () {
+    window.localStorage.setItem('value', textarea.value);
+    window.localStorage.setItem('timestamp', (new Date()).getTime());
+    updateLog(true);
+  }, false);
+
+  function updateLog(new_save) {
+    var log = document.querySelector("#lsLog");
+    var delta = 0;
+    if (window.localStorage.getItem('value')) {
+    delta = ((new Date()).getTime() - (new Date()).setTime(window.localStorage.getItem('timestamp'))) / 1000;
+    if (new_save) {
+      log.textContent = 'Saved. Content will be available after browser refresh/reopen.';
+      setTimeout(function() {
+      log.textContent = '';
+      }, 3000);
+    } else {
+      log.textContent = 'last saved: ' + delta + 's ago';
+    }
+    }
+  }
+
+  })();
+</script>
+  </body>
+
+</html>
+
