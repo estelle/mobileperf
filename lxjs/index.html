@@ -99,19 +99,19 @@
 <div class="slide normal">
      <section class="content">
 
+
+<h2>JavaScript</h2>
+<ul class="">
+<li><em>Render cost:</em> JS (and CSS) <strong title="can be as expensive to render as">(and images)</strong></li>
+<li>JS (download, parsing &amp; executing) </li>
+<li><em title="(like XMLHttpRequest)">Dynamic JS:</em> ⬆ rendering cost (can't be cached). </li>
+<li>AJAX: waking up the radio communications</li>
+</ul>
 <h2>Images</h2>
 <ul>
 <li>Consume energy</li>
 <li>Rendering energy is proportional to # and size of images.</li>
 </ul>
-<h2>JavaScript</h2>
-<ul class="">
-<li><em>Render cost:</em> JS (and CSS) <strong title="can be as expensive to render as">≃</strong> images</li>
-<li><em title="(like XMLHttpRequest)">Dynamic JS:</em> ⬆ rendering cost (can't be cached). </li>
-<li>JS (download, parsing &amp; executing) </li>
-<li>AJAX: waking up the radio communications</li>
-</ul>
-
     </section>
 </div>
 
@@ -194,26 +194,22 @@ development, but increase energy use.</li>
 </div>
 
 
-<!--
-<div class="slide normal">
-<header><h1>Viewers can take notes</h1></header>
-<section class="content">
-<pre contenteditable>Click on the #4 to show some notes stored with local storage</pre>
-</section>
-</div>
+<!-- TERM:  Latency -->
+<div class="slide intro" style="background:url(images/latencykills.jpg) bottom center no-repeat #ffffff;">
+     <header>
+      <h1>I/O Latency</h1>
+     </header>
+     <section>
+     	<p style="margin-top: -10px;">DNS lookups&middot;file count&middot;File size</p>
+     	</ul>
+     </section> <a class="credit" href="http://www.flickr.com/photos/tby/1472668838/">T Bryce Yehl</a>
+
+    </div>
 
 
-<div class="slide normal">
-<header><h1>You can show lines of text over time</h1></header>
-<section class="content">
-<pre contenteditable>Click on the #2 to show more text</pre>
-<p class="temphidden">This used to be hidden</p>
-<p class="temphidden">This was also hidden</p>
-<p class="temphidden">This too</p>
-<p class="temphidden">and so was this</p>
-</section>
-</div>
--->
+
+
+
 <div class="slide title">
   <header><h1>Re-rendering time</h1></header>
   <p>Responsiveness</p>
@@ -249,7 +245,7 @@ development, but increase energy use.</li>
       <h1>Large Gradients</h1>
      </header>
      <section>
-     <ul style="width: 550px"><img src="images/iphonered.png" alt="iphone with large gradient" style="position: absolute; top: 70px; left: 586px;"/>
+     <ul style="width: 550px"><img src="images/iphonered.png" alt="iphone with large gradient" style="position: absolute; top: 70px; left: 566px;"/>
       <li>Keep gradients small</li>
         <li>Requires CPU to create</li>
         <li>Stored in memory</li>
