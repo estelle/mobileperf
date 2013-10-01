@@ -33,21 +33,7 @@
 			</section>
     </div>
 
-<!-- ABOUT ESTELLE -->
-<div class="slide me">
-   <h1 class="intro">Me</h1>
-   <div class="books">
-       <img src="http://akamaicovers.oreilly.com/images/9780980846904/cat.gif" alt="HTML5 and CSS3 for the Real World">
-       <img src="http://akamaicovers.oreilly.com/images/0636920018063/cat.gif" alt="HTML5: The Definitive Guide"/>
-       <img src="http://akamaicovers.oreilly.com/images/0636920021711/cat.gif" alt="MObile HTML5"/>
-       <img src="http://akamaicovers.oreilly.com/images/0636920025955/cat.gif" alt="Web Performance Daybook"/>
-   </div>
-    <br style="clear:both;">
-    <br/>Name: <a>Estelle Weyl</a>
-    <br/>Slides: <a href="http://estelle.github.com/mobileperf/lxjs/">estelle.github.com/mobileperf/lxjs/</a>
-    <br>Blog: <a href="http://standardista.com">standardista.com</a>
-    <br>Twitter: <a href="http://twitter.com/estellevw">@estellevw</a></p>
-</div>
+
 
 
 <div class="slide normal" style="background: url(images/tesla.jpg) no-repeat 50%; background-size: cover;"> <header>
@@ -64,7 +50,7 @@
 <div class="slide intro">
      <section>
      <p>More powerful browsers. <br/>Less powerful CPUs</p>
-     <p>Phones aren't Laptops</p>
+     <p>Browser are browsers, but phones aren't laptops</p>
      </section>
     </div>
 
@@ -87,7 +73,7 @@
 
 
 <!-- BATTERY -->
-<div class="slide normal" style="background-color: #fff">
+<div class="slide">
      <header><h1>Battery</h1>
      </header>
      <section style="background-image:url(images/carbattery.jpeg) , url(images/battery.jpg); background-position: bottom left, 80% 90%; background-size: auto, 130px;height:600px;">
@@ -102,16 +88,16 @@
 
 <h2>JavaScript</h2>
 <ul class="">
-<li><em>Render cost:</em> JS (and CSS) <strong title="can be as expensive to render as">(and images)</strong></li>
+<li><em>Render cost:</em> JS (and CSS <strong title="can be as expensive to render as">and images</strong>)</li>
 <li>JS (download, parsing &amp; executing) </li>
 <li><em title="(like XMLHttpRequest)">Dynamic JS:</em> ⬆ rendering cost (can't be cached). </li>
 <li>AJAX: waking up the radio communications</li>
 </ul>
-<h2>Images</h2>
+<!--<h2>Images</h2>
 <ul>
 <li>Consume energy</li>
 <li>Rendering energy is proportional to # and size of images.</li>
-</ul>
+</ul>-->
     </section>
 </div>
 
@@ -147,8 +133,9 @@ development, but increase energy use.</li>
       <li>Avoid Reflows (and repaints)</li>
       <li>Minimize JavaScript (size and activity)</li>
       <li>No JavaScript Animations<ul>
-      <li><code>requestAnimationFrame</code> (not <code>setInterval</code> or <code>setTimeout</code>)</li></ul></li>
-        <li>Avoid waking up the radio</li>
+      <li><code class="yes">requestAnimationFrame</code> (not <code>setInterval</code> or <code>setTimeout</code>)</li>
+      <li class="yes">CSS Animation</li></ul></li>
+        <li>Avoid waking up the radio - <b class="yes">prefetch</b></li>
         <li>Implement what you learn today</li>
         <li>Avoid loading resources you don't need</li>
         <li>Manage memory</li>
@@ -165,21 +152,20 @@ development, but increase energy use.</li>
   <header><h1></h1></header>
     <section class="content">
     	<div id="ads"><div>ADS</div></div>
+    	<p>and other 3rd party scripts</p>
     	<p><a href="http://www.cs.berkeley.edu/~prmohan/papers/mobads.pdf">Prefetching mobile ads: Can ad systems afford it?</a></p>
 
     </section>
 </div>
 
-<div class="slide title">
-  <header><h1>Latency</h1></header>
-    <section class="content">
-    	<p>Rendering Time</p>
-    </section>
+<div class="slide intro" style="background:url(images/latencykills.jpg) bottom center no-repeat white;">
+  <header><!--<h1>Latency (Rendering Time)<h1>--></header>
+  <a class="credit" href="http://www.flickr.com/photos/tby/1472668838/">T Bryce Yehl</a>
 </div>
 
 
 <!-- Mobile DNS -->
-<div class="slide" style="background-color: #fff">
+<div class="slide">
     <header>
       <h1>Latency</h1>
     </header>
@@ -188,31 +174,92 @@ development, but increase energy use.</li>
         <ul>
             <li><strong>Issue:</strong> Requests take longer to complete</li>
             <li><strong>Solution:</strong> Reducing requests improves performance</li>
-            <!--<li><strong>Web Standards AntiPattern:</strong> Embed CSS and JS (<a href="http://m.bing.com">m.Bing.com</a>)</li>-->
+
         </ul>
     </section>
 </div>
 
 
 <!-- TERM:  Latency -->
-<div class="slide intro" style="background:url(images/latencykills.jpg) bottom center no-repeat #ffffff;">
+<div class="slide">
      <header>
       <h1>I/O Latency</h1>
      </header>
      <section>
-     	<p style="margin-top: -10px;">DNS lookups&middot;file count&middot;File size</p>
+     	<ul class="big">
+     		<li>DNS lookups</li>
+     		<li>File count</li>
+     		<li>File size</li>
      	</ul>
-     </section> <a class="credit" href="http://www.flickr.com/photos/tby/1472668838/">T Bryce Yehl</a>
+     	<div id="ads" style="-webkit-transform: scale(0.5) translatey(-130px); float: left;"><div style="-webkit-transform: scale(1.1) translatex(-1.4rem);">SPOF</div></div>
+     	<div id="ads" style="-webkit-transform: scale(0.5); float: left;margin:0"><div style="font-size: 2.4rem; line-height: 1; padding:2rem 0; -webkit-transform: scale(1.5) translatex(-1rem);">Huge Assets</div></div>
+
+
+     	<div id="ads" style="-webkit-transform: scale(0.5)translate(13rem, -50rem); float: left; "><div style="font-size: 2rem;  line-height: 1; padding:2rem 0; -webkit-transform: scale(1.5)">3rd Party Scripts</div></div>
+
+
+
+     </section>
 
     </div>
 
 
+<div class="slide">
+  <header><h1>Responsive Images</h1></header>
+    <section class="content">
+    	<ul>
+    			<li>&lt;picture&gt;</li>
+    			<li><code>srcset</code></li>
+    			<li>clientHints</li>
+    			<li>Clown Car Technique</li>
+    	</ul>
+    	<p>Optimize</p>
+    	<ul>
+    			<li>Speed</li>
+    			<li>Bandwidth</li>
+    			<li>Memory</li>
+    </section>
+</div>
 
+ <!-- SVG Media Queries -->
+<div class="slide">
+  <header><h1>Object + Media Queries + SVG + CCimg</h1></header>
+  <section>
+  <object data="http://estelle.github.io/clowncar/local.svg" style="float: right;"></object>
+<pre>&lt;object data="data:image/svg+xml,%3Csvg%20viewBox='0%200%20300%20329'%20preserveAspectRatio='xMidYMid%20meet'%20xmlns='http://www.w3.org/2000/svg'%3E%3Ctitle%3EClown%20Car%20Technique%3C/title%3E%3Cstyle%3Esvg%7Bbackground-size:100%25%20100%25;background-repeat:no-repeat;%7D@media%20screen%20and%20(max-width:300px)%7Bsvg%7Bbackground-image:url(https://raw.github.com/estelle/clowncar/master/images/small.png);%7D%7D@media%20screen%20and%20(min-width:301px)%7Bsvg%7Bbackground-image:url(https://raw.github.com/estelle/clowncar/master/images/medium.png);%7D%7D@media%20screen%20and%20(min-width:601px)%7Bsvg%7Bbackground-image:url(https://raw.github.com/estelle/clowncar/master/images/big.png);%7D%7D%3C/style%3E%3C/svg%3E" type="image/svg+xml">
+&lt;!--[if lte IE 8]>
+&lt;img src="images/medium.png" alt="Fall back for IE">
+&lt;![endif]-->
+&lt;/object></pre>
+<pre>
+&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 300 329&quot;
+  preserveAspectRatio=&quot;xMidYMid meet&quot;&gt;
+ &lt;title&gt;Clown Car&lt;/title&gt;
+ &lt;style&gt;
+  svg {
+    background-size: 100% 100%; background-repeat: no-repeat;
+  }
+ @media screen and (max-width: 400px) {
+  svg {background-image: url(images/small.png&quot;);}
+ }
+ @media screen and (min-width: 401px) and (max-width: 700px) {
+  svg {background-image: url(images/medium.png);}
+ }
+ @media screen and (min-width: 701px) and (max-width: 1000px) {
+  svg {background-image: url(images/big.png);}
+ }
+ @media screen and (min-width: 1001px) {
+  svg {background-image: url(images/huge.png);}
+ }
+ &lt;/style&gt;
+&lt;/svg&gt;</pre>
+  </section>
+ </div>
 
 
 <div class="slide title">
-  <header><h1>Re-rendering time</h1></header>
-  <p>Responsiveness</p>
+  <header><h1>Responsiveness</h1></header>
+  <ol class="big" style="margin-left: 100px; text-align: left"><li>User Interaction</li><li>Re-rendering time</li></ol>
 </div>
 
 
@@ -223,8 +270,37 @@ development, but increase energy use.</li>
     </section>
 </div>
 
+
+<!-- touch events -->
+<div class="slide" style="background-image:url(images/gestures.gif); background-size:80%; background-position: 50% 90%">
+<header>
+<h1>Touch Events</h1>
+</header>
+<section>
+<ul style="background-color: rgba(255,255,255, 0.75); float: left;">
+    <li>Touch Event: 300ms delay</li>
+    <li>Extra touches aren't forgotten</li>
+    <li>co-opt with touch events with JS</li>
+</ul>
+<pre contenteditable style="font-size: 1.4rem;background-color: rgba(255,255,255, 0.75); clear: both; float: left;">el.addEventListener('click', myFunction);
+el.addEventListener('touchend', myFunction);<b style="color:#900">*</b></pre>
+<pre contenteditable style="font-size: 1.4rem;background-color: rgba(255,255,255, 0.75); clear: both; float: left;">&lt;meta name="viewport"
+ content="width=device-width;
+          initial-scale=1; maximum-scale=1;"</pre>
+
+</section>
+<b style="color:#900">* Scroll throws a touchend :(</b>
+<a class="credit" href="http://www.lukew.com/touch/TouchGestureGuide.pdf">Luke W.</a>
+</div>
+
+
 <div class="slide title">
-  <header><h1>16ms</h1></header>
+  <header><h1>Responsiveness</h1></header>
+  <ol class="big" style="margin-left: 100px; text-align: left"><li>User Interaction</li><li>Re-rendering time</li></ol>
+</div>
+
+<div class="slide title">
+  <header><h1>60FPS = 16.67ms per frame</h1></header>
     <section class="content">
     	<p>Frame Rate</p>
     </section>
@@ -239,10 +315,67 @@ development, but increase energy use.</li>
 </div>
 
 
+<div class="slide">
+  <header><h1>JavaScript Animation</h1></header>
+    <section class="content">
+    	<p><code class="yes" style="font-size: 2em;">requestAnimationFrame</code> <br>(not <code>setInterval</code> or <code>setTimeout</code>)</p>
+
+    	<p>Goal: New Frame every 16.67ms goal at 60hz</p>
+    	<ul>
+    		<li>Edit the DOM</li>
+    		<li>Calculate styles</li>
+    		<li>Layout</li>
+    		<li>Paint</li>
+    	</li>
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1>Avoid Reflows</h1></header>
+    <section class="content">
+    	<ol style="-webkit-columns:3;columns:3; margin-left: -40px;">
+    		<li>clientHeight</li>
+    		<li>clientWidth</li>
+    		<li>clientLeft</li>
+    		<li>clientTop</li>
+    		<li>offsetHeight</li>
+    		<li>offsetWidth</li>
+    		<li>offsetLeft</li>
+    		<li>offsetTop</li>
+    		<li>offsetParent</li>
+    		<li>width</li>
+    		<li>height</li>
+    		<li>innerText</li>
+    		<li>outerText</li>
+    		<li class="shrinkalot">getBoundingClientRect()</li>
+    		<li class="shrink">getClientRects()</li>
+    		<li class="shrink">getComputedStyle()</li>
+    		<li>scrollX</li>
+    		<li>scrollY</li>
+    		<li>scrollTo()</li>
+    		<li class="shrink">scrollToView()</li>
+    		<li class="shrinkalot">scrollToViewNeeded()</li>
+    		<li>scrollBy()</li>
+    		<li>scrollByLines()</li>
+    		<li>scrollByPages()</li>
+    		<li>scrollHeight</li>
+    		<li>scrollWidth</li>
+    		<li>scrollLeft</li>
+    		<li>scrollTop</li>
+    	</ul>
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1></h1></header>
+    <section class="content">
+    	<div id="ads"><div style="font-size: 4rem;line-height: 5rem">Long Paints</div>
+    </section>
+</div>
 <!-- Gradients -->
 <div class="slide normal" id="largegradient">
      <header>
-      <h1>Large Gradients</h1>
+      <h1>Large Gradients &amp; Shadows</h1>
      </header>
      <section>
      <ul style="width: 550px"><img src="images/iphonered.png" alt="iphone with large gradient" style="position: absolute; top: 70px; left: 566px;"/>
@@ -257,17 +390,153 @@ Images often faster than Gradients</li>
      </section>
     </div>
 
-<!-- ABOUT ESTELLE -->
 <div class="slide">
-   <h1 class="intro">Mobile: Web Performance</h1>
+  <header><h1>Hardware Accelerate</h1></header>
+    <section class="content">
+    </section>
+</div>
+
+
+<!-- Device Memory: CPU comparison -->
+<div class="slide normal">
+ <header><h1>Memory</h1></header>
+ <section>
+    <table class="rowed">
+    <thead>
+    <tr>
+        <th>Device</th>
+        <th>Memory</th><th></th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr><td>iPhone 3G</td><td>128MB</td><td rowspan="6"><img src="images/iphone.jpg" width="40" alt="iphone"><br>
+        <img src="images/htcinspire.jpg"width="40" alt="htc inspire"><br>
+        <img src="images/ipad.jpg"width="40" alt="iPad"></td></tr>
+        <tr><td>iPhone 3GS</td><td>256 MB</td></tr>
+        <tr><td>HTC Inspire</td><td>768 MB</td></tr>
+        <tr><td>iPad 1</td><td>256 MB</td></tr>
+        <tr><td>iPod Touch (4)</td><td>256 MB</td></tr>
+        <tr><td>Galaxy S III</td><td>1 GB</td></tr>
+        <tr><td>MacBook Pro</td><td>16 GB</td></tr>
+    </tbody>
+    </table>
+    <p>T-Mobile: cheapest prepaid phone runs Android 2.3 with 256MB</p>
+<p class="notes" style="padding-top: 40px"><strong>Mobile Norm:</strong> 512MB of RAM, with 1GHz Processor</p>
+<p class="notes"><strong>PC Norm:</strong> 8GB+ RAM  </p>
+<h2 class="notes" class="text-align: center;">Developing without mobile in mind <br>
+leads to sloppy App Dev</h2>
+ </section>
+</div>
+
+<!-- HTC Inspire: How much CPU is used without anything running-->
+<div class="slide normal">
+     <header><h1>Browser shares Memory</h1></header>
+     <section>
+    <table class="htc">
+    <thead><tr><td colspan="3">Running Services</td></tr></thead>
+    <tfoot><tr><td style="background-color:#FCC">Other</td><td colspan="2" style="background-color:#6C9">73MB Avail: 255MB + 182MB in 21</td></tr></tfoot>
+    <tbody>
+      <tr><td colspan="2">Calendar</td><td>8.4MB</td></tr>
+        <tr><td colspan="3">Process:com.htc.bgp</td></tr>
+
+      <tr><td rowspan="2"></td><td>ObexService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+
+      <tr><td colspan="2">AT&amp;T Navigator</td><td>8.4MB</td></tr>
+        <tr><td colspan="3">Process: com.telnav.app.android.congular</td></tr>
+
+      <tr><td rowspan="2"></td><td>ResoucePreLoader</td><td>Restarting</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+
+
+      <tr><td colspan="2">AT&amp;T Spots</td><td>2.4MB</td></tr>
+        <tr><td colspan="3">Process: com.matchboxmobile.wasp</td></tr>
+
+      <tr><td rowspan="2"></td><td>WispService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+
+
+
+      <tr><td colspan="2">Media</td><td>4.1MB</td></tr>
+        <tr><td colspan="3">Process: android.process.media</td></tr>
+
+      <tr><td rowspan="2"></td><td>DownloadService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+
+
+
+      <tr><td colspan="2">PVWmdrmService</td><td>2.2MB</td></tr>
+        <tr><td colspan="3">Process: com.pv.wmdrmservice</td></tr>
+
+      <tr><td rowspan="2"></td><td>PVWmdrmService</td><td>31:52:14</td></tr>
+        <tr><td colspan="2">Started by application: Touch to stop</td></tr>
+    </tbody>
+    </table>
+     </section>
+    </div>
+
+
+<!-- minimize DOM -->
+<div class="slide normal">
+    <header>
+      <h1>Minimize the DOM</h1>
+    </header>
+    <section>
+        <ul class="">
+            <li>Minimize number of nodes
+              <ul class="">
+                  <li>Uses up memory &amp; time</li>
+                    <li>Measures each node for each repaint</li>
+                </ul></li>
+            <li>Cache DOM lookups
+            <ul class="">
+                  <li>Store them!</li>
+                </ul>
+            </li>
+            <li>Minimize DOM manipulations
+              <ul class="">
+                  <li>Batch DOM queries &amp; DOM manipulations separately </li>
+                </ul>
+            </li>
+        </ul>
+         <p class="notes" style="margin-top:50px">More nodes = more expensive! </p>
+
+    </section>
+</div>
+
+
+<!-- reuse DOM -->
+<div class="slide normal" style="background:url(images/trashcan.jpg) no-repeat 5% 95% white;">
+    <header>
+      <h1>Reuse the DOM</h1>
+    </header>
+    <section>
+        <p style="font-size: 40px; margin:20px"><strong>Pool</strong> Elements and Objects</p>
+        <p style="font-size: 40px; margin:20px"><strong>Reuse</strong> instead of Allocate and Destroy</p>
+        <img src="images/tetris.gif" alt="tetris" style="float:right;"/>
+        <ol class="">
+          <li style="line-height:1.3">Create a pool of DOM elements (more than you need)</li>
+            <li>Use the nodes you created</li>
+            <li>Release back into pool</li>
+            <li>Go to step 2</li>
+        </ol>
+    </section>
+</div>
+
+
+
+<!-- ABOUT ESTELLE -->
+<div class="slide me">
+   <h1 class="intro">Thank you</h1>
    <div class="books">
        <img src="http://akamaicovers.oreilly.com/images/9780980846904/cat.gif" alt="HTML5 and CSS3 for the Real World">
        <img src="http://akamaicovers.oreilly.com/images/0636920018063/cat.gif" alt="HTML5: The Definitive Guide"/>
        <img src="http://akamaicovers.oreilly.com/images/0636920021711/cat.gif" alt="MObile HTML5"/>
        <img src="http://akamaicovers.oreilly.com/images/0636920025955/cat.gif" alt="Web Performance Daybook"/>
    </div>
-    <br style="clear:both;">Slides: <a href="http://estelle.github.com/mobileperf">estelle.github.com/mobileperf</a>
-    <br/>Name: Estelle Weyl
+    <br style="clear:both;">
+    <br/>Name: <a>Estelle Weyl</a>
+    <br/>Slides: <a href="http://estelle.github.com/mobileperf/lxjs/">estelle.github.com/mobileperf/lxjs/</a>
     <br>Blog: <a href="http://standardista.com">standardista.com</a>
     <br>Twitter: <a href="http://twitter.com/estellevw">@estellevw</a></p>
 </div>
