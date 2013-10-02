@@ -317,7 +317,7 @@ a {color: #f0f; }
  .me a:nth-of-type(even) {color: #f90;}
 
 
-#ads {
+.ads {
   font-size: 5em; font-weight: bold;
   border-radius: 50%;
   border: 40px solid #900;
@@ -328,7 +328,7 @@ a {color: #f0f; }
   margin: 80px auto;
   position: relative;
 }
-#ads:after {
+.ads:after {
   content: "";
   position: absolute;
   top: 0; right: 0; left: 0; bottom: 0;
@@ -412,8 +412,32 @@ section td, section th {
  }
 
 
+.shader { height: 300px; width: 300px;
+   border: solid rgba(125,125,125,0.5);
+   margin-bottom: 200px;
 
+    -webkit-animation: blowup linear 5s alternate infinite;
+    background: radial-gradient(closest-corner, rgba(200, 0, 0, 0.8), rgba(0,0,240,0.8));
+    background-size: 50%; float: left;}
 
+.shadexr {-webkit-transform: translatez(0); opacity: 0.99;}
+.shader + p {clear:both; color: white;}
+@-webkit-keyframes blowup {
+  0% {
+    height: 100px;
+    border-width: 5px;
+    border-radius: 0;
+    background-position: 0 0;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+  }
+  100% {
+    height: 800px;
+    border-width: 35px;
+    border-radius: 150px;
+    background-position: 100% 100%;
+    box-shadow: 1px 100px 20px 100px rgba(0,0,0,0.9);
+  }
+}
 
 @media print {
   .slide {

@@ -48,9 +48,21 @@
 </div>
 
 <div class="slide intro">
+	<header><h1>Mobile v. Desktop</h1></header>
      <section>
-     <p>More powerful browsers. <br/>Less powerful CPUs</p>
-     <p>Browser are browsers, but phones aren't laptops</p>
+     <p>More powerful browsers. <br/>Less powerful CPUs<br/>Less RAM<br/>More latency</p>
+     <table class="htc">
+     	<tr><th></th><th>IRL</th><th>This Room</th><th>Me</th></tr>
+     	<tr><td colspan="4"></td></tr>
+     	<tr><td>RAM</td><td>256-1024MB</td><td>512-2048MB</td>
+     		<td></td></tr>
+     	<tr><td colspan="4"></td></tr>
+     	<tr><td>Mean</td><td>512MB RAM</td><td>1024MB RAM</td><td>16GB</td></tr>
+     	<tr><td colspan="4"></td></tr>
+     	<tr><td>CPU</td><td>600MHz-1.2GHz</td><td>1.7 GHz </td><td>2.3</td></tr>
+     	<tr><td colspan="4"></td></tr>
+     	<tr><td>OS</td><td>A2.3/3, iOS</td><td>A4+, iOS 6 (7), and 1 FF</td><td></td></tr>
+     </table>
      </section>
     </div>
 
@@ -132,13 +144,12 @@ development, but increase energy use.</li>
      <ul>
       <li>Avoid Reflows (and repaints)</li>
       <li>Minimize JavaScript (size and activity)</li>
+        <li>Avoid loading resources you don't need</li>
       <li>No JavaScript Animations<ul>
       <li><code class="yes">requestAnimationFrame</code> (not <code>setInterval</code> or <code>setTimeout</code>)</li>
       <li class="yes">CSS Animation</li></ul></li>
-        <li>Avoid waking up the radio - <b class="yes">prefetch</b></li>
-        <li>Implement what you learn today</li>
-        <li>Avoid loading resources you don't need</li>
-        <li>Manage memory</li>
+
+        <li>Manage memory</li><li>Avoid waking up the radio - <b class="yes">prefetch</b></li>
      </ul>
      </div>
      <footer class="credit">Image Credit: <a href="http://naiksaneet.wordpress.com">naiksaneet.wordpress.com</a></footer>
@@ -148,10 +159,10 @@ development, but increase energy use.</li>
 
 
 
-<div class="slide">
+<div class="slide" style="background: url(images/thirdpartyscripts.png) right center no-repeat white;">
   <header><h1></h1></header>
     <section class="content">
-    	<div id="ads"><div>ADS</div></div>
+    	<div class="ads"><div>ADS</div></div>
     	<p>and other 3rd party scripts</p>
     	<p><a href="http://www.cs.berkeley.edu/~prmohan/papers/mobads.pdf">Prefetching mobile ads: Can ad systems afford it?</a></p>
 
@@ -191,11 +202,11 @@ development, but increase energy use.</li>
      		<li>File count</li>
      		<li>File size</li>
      	</ul>
-     	<div id="ads" style="-webkit-transform: scale(0.5) translatey(-130px); float: left;"><div style="-webkit-transform: scale(1.1) translatex(-1.4rem);">SPOF</div></div>
-     	<div id="ads" style="-webkit-transform: scale(0.5); float: left;margin:0"><div style="font-size: 2.4rem; line-height: 1; padding:2rem 0; -webkit-transform: scale(1.5) translatex(-1rem);">Huge Assets</div></div>
+     	<div class="ads" style="-webkit-transform: scale(0.5) translatey(-130px); float: left;"><div style="-webkit-transform: scale(1.1) translatex(-1.4rem);">SPOF</div></div>
+     	<div class="ads" style="-webkit-transform: scale(0.5); float: left;margin:0"><div style="font-size: 2.4rem; line-height: 1; padding:2rem 0; -webkit-transform: scale(1.5) translatex(-1rem);">Huge Assets</div></div>
 
 
-     	<div id="ads" style="-webkit-transform: scale(0.5)translate(13rem, -50rem); float: left; "><div style="font-size: 2rem;  line-height: 1; padding:2rem 0; -webkit-transform: scale(1.5)">3rd Party Scripts</div></div>
+     	<div class="ads" style="-webkit-transform: scale(0.5)translate(13rem, -50rem); float: left; "><div style="font-size: 2rem;  line-height: 1; padding:2rem 0; -webkit-transform: scale(1.5)">3rd Party Scripts</div></div>
 
 
 
@@ -209,8 +220,8 @@ development, but increase energy use.</li>
     <section class="content">
     	<ul>
     			<li>&lt;picture&gt;</li>
-    			<li><code>srcset</code></li>
-    			<li>clientHints</li>
+    			<li><code><strong>srcset</strong>="sm.jpg 640w, smhd.jpg 640w 2x, lghd.jpg 2x"</code></li>
+    			<li>Client-Hints (dw, dh, dpr)</li>
     			<li>Clown Car Technique</li>
     	</ul>
     	<p>Optimize</p>
@@ -256,6 +267,13 @@ development, but increase energy use.</li>
   </section>
  </div>
 
+<!-- SVG Media Queries -->
+<div class="slide object">
+
+  <object data="http://estelle.github.io/clowncar/"></object>
+  <a href="http://estelle.github.io/clowncar/" class="objectlink" target="play">Play</a>
+ </div>
+
 
 <div class="slide title">
   <header><h1>Responsiveness</h1></header>
@@ -277,16 +295,15 @@ development, but increase energy use.</li>
 <h1>Touch Events</h1>
 </header>
 <section>
-<ul style="background-color: rgba(255,255,255, 0.75); float: left;">
+<ul style="background-color: rgba(255,255,255, 0.9); float: left;">
     <li>Touch Event: 300ms delay</li>
-    <li>Extra touches aren't forgotten</li>
-    <li>co-opt with touch events with JS</li>
+    <li>provide user feedback, fetch, update when ready</li>
 </ul>
-<pre contenteditable style="font-size: 1.4rem;background-color: rgba(255,255,255, 0.75); clear: both; float: left;">el.addEventListener('click', myFunction);
+<pre contenteditable style="font-size: 1.4rem;background-color: rgba(255,255,255, 0.9); clear: both; float: left;">el.addEventListener('click', myFunction);
 el.addEventListener('touchend', myFunction);<b style="color:#900">*</b></pre>
-<pre contenteditable style="font-size: 1.4rem;background-color: rgba(255,255,255, 0.75); clear: both; float: left;">&lt;meta name="viewport"
+<pre contenteditable style="font-size: 1.4rem;background-color: rgba(255,255,255, 0.9); clear: both; float: left;">&lt;meta name="viewport"
  content="width=device-width;
-          initial-scale=1; maximum-scale=1;"</pre>
+          initial-scale=1; maximum-scale=1;"></pre>
 
 </section>
 <b style="color:#900">* Scroll throws a touchend :(</b>
@@ -309,7 +326,7 @@ el.addEventListener('touchend', myFunction);<b style="color:#900">*</b></pre>
 <div class="slide">
   <header><h1></h1></header>
     <section class="content">
-    	<div id="ads"><div>Jank</div></div>
+    	<div class="ads"><div>Jank</div></div>
 
     </section>
 </div>
@@ -369,11 +386,11 @@ el.addEventListener('touchend', myFunction);<b style="color:#900">*</b></pre>
 <div class="slide">
   <header><h1></h1></header>
     <section class="content">
-    	<div id="ads"><div style="font-size: 4rem;line-height: 5rem">Long Paints</div>
+    	<div class="ads"><div style="font-size: 4rem;line-height: 5rem">Long Paints</div>
     </section>
 </div>
 <!-- Gradients -->
-<div class="slide normal" id="largegradient">
+<div class="slide normal" id="largegradient" style="opacity:0.99">
      <header>
       <h1>Large Gradients &amp; Shadows</h1>
      </header>
@@ -390,9 +407,33 @@ Images often faster than Gradients</li>
      </section>
     </div>
 
+
+<div class="slide normal" style="background-image:url(images/batteries.jpg); background-size: cover;">
+<div class="shader shader1"></div>
+<div class="shader shader2"></div>
+<p>here is some text</p>
+</div>
+
+
+
+
 <div class="slide">
   <header><h1>Hardware Accelerate</h1></header>
-    <section class="content">
+    <section class="content" style="-webkit-columns: 2">
+    <p style="margin-top:0">	GPU</p>
+    <ul><li>	transform</li><li>
+    	opacity</li></ul>
+
+    	<p>PAINT</p>
+    	<ul><li>outline</li><li>
+    	shadow</li></ul>
+
+    	<p>LAYOUT</p>
+    	<ul><li>height</li><li>
+    	width</li><li>
+    	border</li></ul>
+    	<p>&nbsp;</p>
+    	<p>&nbsp;</p>
     </section>
 </div>
 
