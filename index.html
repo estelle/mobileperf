@@ -444,6 +444,66 @@ h1.intro {
 .object object {width: 100%; height: 100%;}
 .notes, .temphidden {display: none;}
 
+
+.resize object {
+  margin-top:50px;
+  width: 200%;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: top left;
+  transform: scale(0.5);
+  transform-origin: top left;
+  height: 200%;
+  -webkit-animation: infinite 8s 2s linear alternate resize;
+  animation: infinite 8s 2s linear alternate resize;
+}
+
+.resize2 object {
+  -webkit-animation: resized infinite 8s 2s linear alternate  backwards;
+  animation: resized infinited 8s 2s linear alternate  backwards;
+  border: 1px solid; }
+
+.resize:hover object {
+  -webkit-animation-play-state: paused; }
+
+.resize .img {
+  -webkit-animation: resize_clip infinite 8s 2s linear alternate backwards;
+  animation: resize_clip infinite 8s 2s linear alternate  backwards;
+  margin: auto;
+  border: 1px solid #ccc;
+  -webkit-transform-origin: top left;
+  transform-origin: top left;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); }
+
+
+@-webkit-keyframes resized {
+  0% {
+    height: 100%;
+    width: 50%;
+    -webkit-transform: scale(0.5);
+  }
+
+  100% {
+    width: 200%;
+    -webkit-transform: scale(0.5);
+    height: 200%; }
+  }
+
+@keyframes resize {
+  0%, 30% {
+    height: 100%;
+    width: 50%;
+    transform: scale(1); }
+
+  70%, 100% {
+    width: 200%;
+    transform: scale(0.5);
+    height: 200%; } }
+
+
+
+
+
+
 .hidenotes {display: none;}
 
 .visible .hidenotes {
@@ -626,6 +686,52 @@ p.img img {height: 40px; vertical-align: bottom; position: relative; top: 5px;}
   #presentation-counter, #info, #topinfo, .counter {
     display: none
   }
+.resizeimg img {
+  width: 100%; }
+
+.object object,
+.object .img {
+  height: 100%;
+  width: 100%;
+}
+
+@-webkit-keyframes resize_clip {
+  0%, 60% {
+    max-width: 100%;
+    min-height: 900px; }
+
+  60%, 100% {
+    max-width: 320px;
+    min-height: 480px; } }
+
+@keyframes resize_clip {
+  0%, 60% {
+    max-width: 100%;
+    min-height: 900px; }
+
+  60%, 100% {
+    max-width: 320px;
+    min-height: 480px; } }
+
+@-webkit-keyframes resized {
+  0%, 30% {
+    height: 100%;
+    width: 20%; }
+
+  70%, 100% {
+    width: 140%;
+    height: 200%; } }
+
+.objectlink {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: steelblue;
+  color: #FFF;
+  padding: 5px 20px;
+  border-radius: 0 0 0 40px;
+  text-decoration: none;
+  font-size: 0.8rem; }
 
 </style>
 </head>
@@ -1103,14 +1209,18 @@ development, but increase energy use.</li>
     </tr>
     </thead>
     <tbody>
-        <tr><td>iPhone 3G</td><td>128MB</td><td rowspan="6"><img src="images/iphone.jpg" width="40" alt="iphone"><br>
+        <tr><td>iPhone 3G</td><td>128MB</td><td rowspan="10"><img src="images/iphone.jpg" width="40" alt="iphone"><br>
         <img src="images/htcinspire.jpg"width="40" alt="htc inspire"><br>
         <img src="images/ipad.jpg"width="40" alt="iPad"></td></tr>
         <tr><td>iPhone 3GS</td><td>256 MB</td></tr>
+        <tr><td>iPhone 5/5S/6</td><td>1 GB</td></tr>
         <tr><td>HTC Inspire</td><td>768 MB</td></tr>
         <tr><td>iPad 1</td><td>256 MB</td></tr>
+        <tr><td>iPad 3/4</td><td>1 GB</td></tr>
         <tr><td>iPod Touch (4)</td><td>256 MB</td></tr>
-        <tr><td>MacBook Pro</td><td>8 GB</td></tr>
+        <tr><td>Samsung Galaxy Note Edge</td><td>3GB</td></tr>
+        <tr><td>Intex Cloud FX</td><td>128 MB</td></tr>
+        <tr><td>MacBook Pro</td><td>16 GB</td></tr>
     </tbody>
     </table>
 <p class="notes" style="padding-top: 40px"><strong>Mobile Norm:</strong> 512MB of RAM, with 1GHz Processor</p>
@@ -1227,6 +1337,24 @@ Images <big>1024px</big> or bigger are too <big>big</big> for memory</p>
    <footer class="credit">Photo: <a href="http://www.hdwallpapers4ipad.com/photo/abstract_backgrounds/broken_screen/2-0-1568">hdwallpapers4ipad.com</a></footer>
     </section>
 </div>
+
+ <div class="slide resize resizeimg">
+   <header><h1>Right-size your images</h1></header>
+     <section class="content">
+
+      <p>Scaled: 1,850 milliseconds</p>
+      <img src="img/bad-trimmed-2_resize_image.png">
+
+      <p>Right-sized: 625 milliseconds</p>
+      <img src="img/good-trimmed-2_resize_image.png">
+<ul>
+  <li>blue = CPU used to decode</lu>
+    <li>green = FPS (more is better)</li>
+    <li>purple = rendering</li>
+  </ul>
+  <a class="objectlink" href="http://physicsoffast.io/demos/">PhysicsOfFast</a>
+     </section>
+ </div>
 
 <!-- media queries -->
 
@@ -1568,7 +1696,15 @@ code:hover {
 
 
 
-
+<div class="slide object resize resize2">
+  <header><h1>Object + Media Queries + SVG + CCimg</h1></header>
+  <section>
+  <object data="cc2.svg">
+<!--[if lte IE 8]>
+<img src="images/medium.png" alt="Fall back for IE">
+<![endif]-->
+</object>
+</div>
 
 
 
@@ -1728,7 +1864,7 @@ code:hover {
 </section>
 </div>
 
-
+<!--
 <div class="slide intro">
   <header><h1>So, how you doin'?</h1></header>
     <section class="content">
@@ -1800,9 +1936,9 @@ code:hover {
 
 
 
-
+-->
 <div class="slide intro"  style="background-image:url(images/bandaid.png), url(images/broken-lcd.jpg); background-size: 300px, cover; background-position: 75% 27%,top right">
-     <header><h1 style="font-size: 250%">Other Tips</h1></header>
+     <header><h1 style="font-size: 250%">Tips</h1></header>
      <section class="content">
      <footer class="credit">Photo: <a href="http://www.hdwallpapers4ipad.com/photo/abstract_backgrounds/broken_screen/2-0-1568">hdwallpapers4ipad.com</a></footer>
      </section>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 329"
+  preserveAspectRatio="xMidYMid meet">
+ <title>Clown Car</title>
+ <style>
+  svg {
+    background-size: 100% 100%; background-repeat: no-repeat;
+  }
+ @media screen and (max-width: 300px) {
+  svg {background-image: url(images/small.png);
+  background-size: 158px;
+  }
+ }
+ @media screen and (min-width: 301px) and (max-width: 600px) {
+  svg {background-image: url(images/medium.png);
+  background-size: 300px;}
+ }
+ @media screen and (min-width: 601px) and (max-width: 900px) {
+  svg {background-image: url(images/big.png);
+  background-size: 600px;}
+ }
+ @media screen and (min-width: 901px) {
+  svg {background-image: url(images/huge.png);
+  background-size: 900px;}
+ }
+ </style>
+</svg>
